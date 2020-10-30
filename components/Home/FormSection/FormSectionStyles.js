@@ -66,7 +66,7 @@ const FormSectionStyles = styled.div`
 
       input {
         width: 100%;
-        height: clamp(40px, 2.5vw, 60px);
+        height: clamp(40px, 3vw, 50px);
         margin-top: 20px;
         padding: 20px;
 
@@ -77,10 +77,27 @@ const FormSectionStyles = styled.div`
         outline: none;
       }
 
+      .emailError,
+      .passwordError,
+      .repeatPasswordError {
+        margin: 5px 0 0 20px;
+        align-self: flex-start;
+
+        color: red;
+        font-size: 12px;
+      }
+
+      .emptyFieldsError {
+        margin: 25px 0 15px 0;
+
+        color: red;
+        font-size: 12px;
+      }
+
       button {
         width: 200px;
         height: clamp(40px, 2.5vw, 60px);
-        margin-top: 30px;
+        margin-top: ${(props) => props.buttonMargin};
 
         border: none;
         border-radius: 25px;
@@ -104,6 +121,90 @@ const FormSectionStyles = styled.div`
           );
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+        }
+      }
+
+      .loading {
+        height: clamp(40px, 2.5vw, 60px);
+        margin-top: 30px;
+
+        display: flex;
+        align-items: center;
+
+        text-align: center;
+
+        @media (max-width: 1280px) {
+          margin-bottom: 50px;
+        }
+
+        div {
+          width: 15px;
+          height: 15px;
+
+          margin: 0 4px;
+
+          background-color: #fff;
+          border-radius: 100%;
+
+          animation: bouncedelay 1.2s infinite ease-in-out both;
+        }
+
+        .dot1 {
+          animation-delay: -0.32s;
+        }
+
+        .dot2 {
+          animation-delay: -0.16s;
+        }
+
+        @keyframes bouncedelay {
+          0%,
+          80%,
+          100% {
+            transform: scale(0);
+          }
+          40% {
+            transform: scale(1);
+          }
+        }
+      }
+
+      .error {
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+
+        animation: 0.6s appear;
+
+        @media (max-width: 1280px) {
+          margin-bottom: 50px;
+        }
+
+        img {
+          width: 30px;
+        }
+
+        p {
+          margin-left: 5px;
+
+          color: #fff;
+          font-size: 14px;
+          font-style: italic;
+        }
+
+        @keyframes appear {
+          0% {
+            transform: scale(0.2);
+          }
+          60% {
+            transform: scale(1);
+          }
+          80% {
+            transform: scale(0.9);
+          }
+          100% {
+            transform: scale(1);
+          }
         }
       }
     }

@@ -5,7 +5,7 @@ const ContentSection = () => {
     <>
       <ContentSectionStyles>
         <header className='logoSection'>
-          <img src='/logo.png' alt='' />
+          <img src='/images/logo.png' alt='' />
           <div>
             <h1>Velrin's</h1>
             <h2>chat</h2>
@@ -13,7 +13,7 @@ const ContentSection = () => {
         </header>
         <section className='mainSection'>
           <h2>Take your chats to the next level</h2>
-          <img src='/phone.svg' alt='phone' />
+          <img src='/images/phone.svg' alt='phone' />
         </section>
       </ContentSectionStyles>
     </>
