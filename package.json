@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "test": "jest",
     "build": "next build",
     "start": "next start"
   },
@@ -13,5 +14,11 @@
     "react-dom": "17.0.1",
     "styled-components": "^5.2.0",
     "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "babel-jest": "^26.6.2",
+    "jest": "^26.6.2"
   }
 }

@@ -141,7 +141,7 @@ const FormSection = () => {
               <p>Something went wrong.</p>
             </div>
           ) : (
-            <button type='submit'>
+            <button type='submit' aria-label='submit'>
               <span>Sign up</span>
             </button>
           )}
