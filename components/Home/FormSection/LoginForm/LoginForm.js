@@ -65,7 +65,7 @@ const RegisterForm = ({ changeToRegister }) => {
           aria-label='submit'
           style={!emptyFields ? { marginTop: '30px' } : null}
         >
-          <span>Sign up</span>
+          <span>Sign in</span>
         </button>
       )}
 

@@ -146,7 +146,7 @@ const RegisterForm = ({ changeToLogin }) => {
       )}
 
       <p>
-        Already have an account? <span onClick={changeToLogin}>Log in</span>
+        Already have an account? <span onClick={changeToLogin}>Sign in</span>
       </p>
     </form>
   );

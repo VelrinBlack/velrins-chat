@@ -17,7 +17,7 @@ const FormSection = () => {
           </>
         ) : (
           <>
-            <h2>Log in</h2>
+            <h2>Sign in</h2>
             <LoginForm changeToRegister={() => setFormType('register')} />
           </>
         )}
