@@ -1,151 +1,26 @@
-import { useState } from 'react';
-import validator from 'validator';
+import { useEffect, useState } from 'react';
 
 import FormSectionStyles from './FormSectionStyles';
+import RegisterForm from './RegisterForm/RegisterForm';
+import LoginForm from './LoginForm/LoginForm';
 
 const FormSection = () => {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [repeatPasswordError, setRepeatPasswordError] = useState(false);
-  const [emptyFields, setEmptyFields] = useState(false);
-  const [requestStatus, setRequestStatus] = useState(null);
-
-  const handleInputChange = ({ target }) => {
-    switch (target.name) {
-      case 'name':
-        return setName(target.value);
-      case 'surname':
-        return setSurname(target.value);
-      case 'email':
-        return setEmail(target.value);
-      case 'password':
-        return setPassword(target.value);
-      case 'repeatPassword':
-        return setRepeatPassword(target.value);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (email) {
-      setEmailError(!validator.isEmail(email));
-    } else {
-      setEmailError(false);
-    }
-
-    if (password) {
-      setPasswordError(password.length < 7 || password.length > 20);
-    } else {
-      setPasswordError(false);
-    }
-
-    if (repeatPassword) {
-      setRepeatPasswordError(password !== repeatPassword);
-    } else {
-      setRepeatPasswordError(false);
-    }
-
-    setEmptyFields(!name || !surname || !email || !password || !repeatPassword);
-
-    if (
-      validator.isEmail(email) &&
-      password.length >= 7 &&
-      password.length <= 20 &&
-      password === repeatPassword &&
-      name &&
-      surname &&
-      email &&
-      password &&
-      repeatPassword
-    ) {
-      console.log('Everything is ok.');
-    }
-  };
+  const [formType, setFormType] = useState('register');
 
   return (
-    <FormSectionStyles buttonMargin={emptyFields ? '0px' : '30px'}>
+    <FormSectionStyles>
       <div className='contentContainer'>
-        <h2>Sign up now!</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className='container'>
-            <input
-              type='text'
-              placeholder='Name'
-              name='name'
-              onChange={handleInputChange}
-              value={name}
-            />
-            <input
-              type='text'
-              placeholder='Surname'
-              name='surname'
-              onChange={handleInputChange}
-              value={surname}
-            />
-          </div>
-
-          <input
-            type='text'
-            placeholder='Email'
-            name='email'
-            onChange={handleInputChange}
-            value={email}
-          />
-          {emailError ? <p className='emailError'>Email is not valid</p> : null}
-
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            onChange={handleInputChange}
-            value={password}
-          />
-          {passwordError ? (
-            <p className='passwordError'>
-              Password must contain from 7 to 20 characters
-            </p>
-          ) : null}
-
-          <input
-            type='password'
-            placeholder='Repeat password'
-            name='repeatPassword'
-            onChange={handleInputChange}
-            value={repeatPassword}
-          />
-          {repeatPasswordError ? (
-            <p className='repeatPasswordError'>Passwords don't match</p>
-          ) : null}
-
-          {emptyFields ? (
-            <p className='emptyFieldsError'>Please fill empty fields</p>
-          ) : null}
-
-          {requestStatus === 'loading' ? (
-            <div className='loading'>
-              <div className='dot1'></div>
-              <div className='dot2'></div>
-              <div className='dot3'></div>
-            </div>
-          ) : requestStatus === 'error' ? (
-            <div className='error'>
-              <img src='/images/error.svg' alt='error' />
-              <p>Something went wrong.</p>
-            </div>
-          ) : (
-            <button type='submit' aria-label='submit'>
-              <span>Sign up</span>
-            </button>
-          )}
-        </form>
+        {formType === 'register' ? (
+          <>
+            <h2>Sign up now!</h2>
+            <RegisterForm changeToLogin={() => setFormType('login')} />
+          </>
+        ) : (
+          <>
+            <h2>Log in</h2>
+            <LoginForm changeToRegister={() => setFormType('register')} />
+          </>
+        )}
       </div>
     </FormSectionStyles>
   );

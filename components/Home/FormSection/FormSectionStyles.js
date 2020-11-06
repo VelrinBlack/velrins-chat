@@ -5,23 +5,26 @@ const FormSectionStyles = styled.div`
 
   background: linear-gradient(180deg, #18586d 0%, #1b6177 0.01%, #0a3745 100%);
   clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0% 100%);
+  overflow-y: hidden;
 
   @media (max-width: 1280px) {
     clip-path: none;
   }
 
   .contentContainer {
+    position: relative;
+
     height: 100%;
     margin-left: 15%;
-
-    @media (max-width: 1280px) {
-      margin-left: 0;
-    }
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 1280px) {
+      margin-left: 0;
+    }
 
     h2 {
       color: #fff;
@@ -35,7 +38,7 @@ const FormSectionStyles = styled.div`
 
     form {
       width: 90%;
-      margin-top: 50px;
+      margin-top: 30px;
 
       display: flex;
       flex-direction: column;
@@ -97,7 +100,6 @@ const FormSectionStyles = styled.div`
       button {
         width: 200px;
         height: clamp(40px, 2.5vw, 60px);
-        margin-top: ${(props) => props.buttonMargin};
 
         border: none;
         border-radius: 25px;
@@ -206,6 +208,20 @@ const FormSectionStyles = styled.div`
             transform: scale(1);
           }
         }
+      }
+    }
+
+    p {
+      margin-top: 30px;
+
+      color: #fff;
+      font-size: 14px;
+      font-weight: 200;
+
+      span {
+        font-weight: 400;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
