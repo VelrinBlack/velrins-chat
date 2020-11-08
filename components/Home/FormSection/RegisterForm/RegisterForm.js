@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import validator from 'validator';
+import axios from 'axios';
 
 const RegisterForm = ({ changeToLogin }) => {
   const [name, setName] = useState('');
@@ -12,7 +13,7 @@ const RegisterForm = ({ changeToLogin }) => {
   const [passwordError, setPasswordError] = useState(false);
   const [repeatPasswordError, setRepeatPasswordError] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
-  const [requestStatus, setRequestStatus] = useState(null);
+  const [serverResponse, setServerResponse] = useState(null);
 
   const handleInputChange = ({ target }) => {
     switch (target.name) {
@@ -63,7 +64,22 @@ const RegisterForm = ({ changeToLogin }) => {
       password &&
       repeatPassword
     ) {
-      console.log('Everything is ok.');
+      setServerResponse('loading');
+
+      axios
+        .post(`${process.env.BACKEND_URL}/api/user/register`, {
+          name,
+          surname,
+          email,
+          password,
+        })
+        .then((res) => {
+          localStorage.setItem('token', res.data.token);
+        })
+        .catch((err) => {
+          if (err.response) setServerResponse(err.response.data);
+          else serverResponse('error');
+        });
     }
   };
 
@@ -124,30 +140,33 @@ const RegisterForm = ({ changeToLogin }) => {
         <p className='emptyFieldsError'>Please fill empty fields</p>
       ) : null}
 
-      {requestStatus === 'loading' ? (
+      <button
+        type='submit'
+        aria-label='submit'
+        style={!emptyFields ? { marginTop: '30px' } : null}
+      >
+        <span>Sign up</span>
+      </button>
+
+      {serverResponse === null ? null : serverResponse === 'loading' ? (
         <div className='loading'>
           <div className='dot1'></div>
           <div className='dot2'></div>
           <div className='dot3'></div>
         </div>
-      ) : requestStatus === 'error' ? (
+      ) : serverResponse === 'User already exists' ? (
         <div className='error'>
           <img src='/images/error.svg' alt='error' />
-          <p>Something went wrong.</p>
+          <p>
+            User already exists <span onClick={changeToLogin}>Sign in</span>
+          </p>
         </div>
       ) : (
-        <button
-          type='submit'
-          aria-label='submit'
-          style={!emptyFields ? { marginTop: '30px' } : null}
-        >
-          <span>Sign up</span>
-        </button>
+        <div className='error'>
+          <img src='/images/error.svg' alt='error' />
+          <p>Something went wrong</p>
+        </div>
       )}
-
-      <p>
-        Already have an account? <span onClick={changeToLogin}>Sign in</span>
-      </p>
     </form>
   );
 };

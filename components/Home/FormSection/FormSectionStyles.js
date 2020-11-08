@@ -45,7 +45,7 @@ const FormSectionStyles = styled.div`
       align-items: center;
 
       @media (max-width: 1280px) {
-        margin-top: 30px;
+        margin-bottom: 50px;
       }
 
       .container {
@@ -108,10 +108,6 @@ const FormSectionStyles = styled.div`
         cursor: pointer;
         outline: none;
 
-        @media (max-width: 1280px) {
-          margin-bottom: 50px;
-        }
-
         span {
           font-size: clamp(16px, 1vw, 18px);
           font-weight: bold;
@@ -127,7 +123,7 @@ const FormSectionStyles = styled.div`
       }
 
       .loading {
-        height: clamp(40px, 2.5vw, 60px);
+        height: 30px;
         margin-top: 30px;
 
         display: flex;
@@ -172,26 +168,25 @@ const FormSectionStyles = styled.div`
       }
 
       .error {
-        display: flex;
-        align-items: center;
+        height: 30px;
         margin-top: 30px;
 
-        animation: 0.6s appear;
+        display: flex;
+        align-items: center;
 
-        @media (max-width: 1280px) {
-          margin-bottom: 50px;
-        }
+        animation: 0.6s appear;
 
         img {
           width: 30px;
         }
 
         p {
-          margin-left: 5px;
+          margin: 0 0 0 5px;
 
           color: #fff;
           font-size: 14px;
           font-style: italic;
+          line-height: 30px;
         }
 
         @keyframes appear {

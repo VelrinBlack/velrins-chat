@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import FormSectionStyles from './FormSectionStyles';
 import RegisterForm from './RegisterForm/RegisterForm';
