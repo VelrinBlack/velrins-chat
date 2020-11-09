@@ -112,11 +112,7 @@ const FormSectionStyles = styled.div`
           font-size: clamp(16px, 1vw, 18px);
           font-weight: bold;
 
-          background-image: linear-gradient(
-            272.11deg,
-            #0a3745 3.56%,
-            #1e7f9d 100%
-          );
+          background-image: linear-gradient(272.11deg, #0a3745 3.56%, #1e7f9d 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -130,10 +126,6 @@ const FormSectionStyles = styled.div`
         align-items: center;
 
         text-align: center;
-
-        @media (max-width: 1280px) {
-          margin-bottom: 50px;
-        }
 
         div {
           width: 15px;
@@ -207,11 +199,13 @@ const FormSectionStyles = styled.div`
     }
 
     p {
+      height: 30px;
       margin-top: 30px;
 
       color: #fff;
       font-size: 14px;
       font-weight: 200;
+      line-height: 30px;
 
       span {
         font-weight: 400;

@@ -74,11 +74,16 @@ const RegisterForm = ({ changeToLogin }) => {
           password,
         })
         .then((res) => {
-          localStorage.setItem('token', res.data.token);
+          if (res.data.token) {
+            localStorage.setItem('token', res.data.token);
+          } else if (res.data === 'User already exists') {
+            setServerResponse('User already exists');
+          } else {
+            setServerResponse('error');
+          }
         })
-        .catch((err) => {
-          if (err.response) setServerResponse(err.response.data);
-          else serverResponse('error');
+        .catch(() => {
+          setServerResponse('error');
         });
     }
   };
@@ -119,9 +124,7 @@ const RegisterForm = ({ changeToLogin }) => {
         value={password}
       />
       {passwordError ? (
-        <p className='passwordError'>
-          Password must contain from 7 to 20 characters
-        </p>
+        <p className='passwordError'>Password must contain from 7 to 20 characters</p>
       ) : null}
 
       <input
@@ -132,19 +135,11 @@ const RegisterForm = ({ changeToLogin }) => {
         value={repeatPassword}
       />
 
-      {repeatPasswordError ? (
-        <p className='repeatPasswordError'>Passwords don't match</p>
-      ) : null}
+      {repeatPasswordError ? <p className='repeatPasswordError'>Passwords don't match</p> : null}
 
-      {emptyFields ? (
-        <p className='emptyFieldsError'>Please fill empty fields</p>
-      ) : null}
+      {emptyFields ? <p className='emptyFieldsError'>Please fill empty fields</p> : null}
 
-      <button
-        type='submit'
-        aria-label='submit'
-        style={!emptyFields ? { marginTop: '30px' } : null}
-      >
+      <button type='submit' aria-label='submit' style={!emptyFields ? { marginTop: '30px' } : null}>
         <span>Sign up</span>
       </button>
 
@@ -167,6 +162,12 @@ const RegisterForm = ({ changeToLogin }) => {
           <p>Something went wrong</p>
         </div>
       )}
+
+      {serverResponse === null ? (
+        <p>
+          Already have an account? <span onClick={changeToLogin}>Sign in</span>
+        </p>
+      ) : null}
     </form>
   );
 };

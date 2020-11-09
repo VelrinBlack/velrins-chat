@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import RegisterForm from './RegisterForm';
@@ -36,9 +36,7 @@ describe('RegisterForm', () => {
     const submitButton = screen.getByLabelText('submit');
     fireEvent.click(submitButton);
 
-    const passwordError = screen.getByText(
-      'Password must contain from 7 to 20 characters',
-    );
+    const passwordError = screen.getByText('Password must contain from 7 to 20 characters');
     expect(passwordError).toBeInTheDocument();
   });
 
@@ -70,5 +68,37 @@ describe('RegisterForm', () => {
 
     const emptyFieldsError = screen.getByText('Please fill empty fields');
     expect(emptyFieldsError).toBeInTheDocument();
+  });
+
+  test('User already exists error', async () => {
+    const nameInput = screen.getByPlaceholderText('Name');
+    const surnameInput = screen.getByPlaceholderText('Surname');
+    const emailInput = screen.getByPlaceholderText('Email');
+    const passwordInput = screen.getByPlaceholderText('Password');
+    const repeatPasswordInput = screen.getByPlaceholderText('Repeat password');
+    const submitButton = screen.getByLabelText('submit');
+
+    fireEvent.change(nameInput, {
+      target: { value: 'Test' },
+    });
+    fireEvent.change(surnameInput, {
+      target: { value: 'User' },
+    });
+    fireEvent.change(emailInput, {
+      target: { value: 'test@example.com' },
+    });
+    fireEvent.change(passwordInput, {
+      target: { value: 'testpassword' },
+    });
+    fireEvent.change(repeatPasswordInput, {
+      target: { value: 'testpassword' },
+    });
+
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      const userAlreadyExistsError = screen.getByText('User already exists');
+      return expect(userAlreadyExistsError).toBeInTheDocument();
+    });
   });
 });
