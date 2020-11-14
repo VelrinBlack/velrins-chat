@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
+import { signIn } from '../../../../redux/actions/userActions';
+
 const RegisterForm = ({ changeToRegister }) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,6 +38,7 @@ const RegisterForm = ({ changeToRegister }) => {
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem('token', res.data.token);
+            dispatch(signIn({ token: res.data.token }));
           } else if (res.data === 'Invalid email or password') {
             setServerResponse('Invalid email or password');
           } else {

@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import validator from 'validator';
 import axios from 'axios';
 
+import { signIn } from '../../../../redux/actions/userActions';
+
 const RegisterForm = ({ changeToLogin }) => {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -76,6 +81,7 @@ const RegisterForm = ({ changeToLogin }) => {
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem('token', res.data.token);
+            dispatch(signIn({ token: res.data.token }));
           } else if (res.data === 'User already exists') {
             setServerResponse('User already exists');
           } else {

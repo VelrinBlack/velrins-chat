@@ -1,18 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import LandingPage from '../components/LandingPage/LandingPage';
 import Application from '../components/Application/Application';
+import { signIn } from '../redux/actions/userActions';
 
 const HomePage = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      setIsLoggedIn(true);
+      dispatch(signIn({ token: localStorage.getItem('token') }));
     }
   }, []);
 
-  return <>{isLoggedIn ? <Application /> : <LandingPage />}</>;
+  if (user) {
+    return <Application />;
+  } else {
+    return <LandingPage />;
+  }
 };
 
 export default HomePage;
