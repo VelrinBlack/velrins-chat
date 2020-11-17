@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HomeStyles = styled.div`
+const LandingPageStyles = styled.div`
   height: 100vh;
 
   display: flex;
@@ -21,4 +21,4 @@ const HomeStyles = styled.div`
   }
 `;
 
-export default HomeStyles;
+export default LandingPageStyles;

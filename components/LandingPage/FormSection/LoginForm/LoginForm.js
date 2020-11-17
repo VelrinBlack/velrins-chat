@@ -31,7 +31,7 @@ const RegisterForm = ({ changeToRegister }) => {
       setServerResponse('loading');
 
       axios
-        .post(`${process.env.BACKEND_URL}/api/user/authenticate`, {
+        .post(`${process.env.BACKEND_URL}/api/user/login`, {
           email,
           password,
         })
