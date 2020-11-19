@@ -1,7 +1,40 @@
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+
+import LoadingScreen from './LoadingScreen/LoadingScreen';
+import ActivationScreen from './ActivationScreen/ActivationScreen';
+import { signOut } from '../../redux/actions/userActions';
+
 const Application = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.user);
+
+  const [serverResponse, setServerResponse] = useState('loading');
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.BACKEND_URL}/api/user/authorizate`, {
+        token,
+      })
+      .then((res) => {
+        setServerResponse(res.data);
+      })
+      .catch(() => {
+        localStorage.removeItem('token');
+        dispatch(signOut());
+      });
+  }, []);
+
   return (
     <>
-      <h1>Application</h1>
+      {serverResponse === 'loading' ? (
+        <LoadingScreen />
+      ) : serverResponse === 'User is not activated' ? (
+        <ActivationScreen />
+      ) : (
+        <h1>Something went wrong</h1>
+      )}
     </>
   );
 };
