@@ -23,6 +23,7 @@ const Application = () => {
         token,
       })
       .then((res) => {
+        console.log(res.data);
         setServerResponse(res.data);
       })
       .catch(() => {
@@ -35,8 +36,8 @@ const Application = () => {
     <>
       {serverResponse === 'loading' ? (
         <LoadingScreen />
-      ) : serverResponse === 'User is not activated' ? (
-        <ActivationScreen />
+      ) : serverResponse.message === 'User not activated' ? (
+        <ActivationScreen email={serverResponse.email} />
       ) : (
         <h1>Something went wrong</h1>
       )}

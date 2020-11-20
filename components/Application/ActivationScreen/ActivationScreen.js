@@ -1,6 +1,6 @@
 import ActivationScreenStyles from './ActivationScreenStyles';
 
-const ActivationScreen = () => {
+const ActivationScreen = ({ email }) => {
   return (
     <ActivationScreenStyles>
       <div className='imageContainer'>
@@ -14,7 +14,7 @@ const ActivationScreen = () => {
 
         <p>
           We've sent verification code to <br />
-          <b>velrinblack@gmail.com</b> <br />
+          <b>{email}</b> <br />
           <span>Change email</span>
         </p>
 
