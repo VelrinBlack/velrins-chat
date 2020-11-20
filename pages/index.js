@@ -7,7 +7,12 @@ import { signIn } from '../redux/actions/userActions';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+
+  const token = useSelector((state) => {
+    if (state.user) {
+      return state.user.token;
+    }
+  });
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -15,7 +20,7 @@ const HomePage = () => {
     }
   }, []);
 
-  if (user) {
+  if (token) {
     return <Application />;
   } else {
     return <LandingPage />;

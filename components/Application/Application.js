@@ -8,7 +8,12 @@ import { signOut } from '../../redux/actions/userActions';
 
 const Application = () => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.user);
+
+  const token = useSelector((state) => {
+    if (state.user) {
+      return state.user.token;
+    }
+  });
 
   const [serverResponse, setServerResponse] = useState('loading');
 
