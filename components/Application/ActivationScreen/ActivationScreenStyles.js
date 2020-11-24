@@ -60,17 +60,6 @@ const ActivationScreenStyles = styled.div`
         margin-top: 40px;
         font-size: 16px;
       }
-
-      span {
-        font-size: 14px;
-        color: #505050;
-
-        cursor: pointer;
-
-        @media (max-width: 550px) {
-          font-size: 13px;
-        }
-      }
     }
 
     form {
@@ -122,11 +111,20 @@ const ActivationScreenStyles = styled.div`
         }
       }
 
+      .validationError {
+        margin-top: 20px;
+        margin-bottom: 15px;
+
+        color: red;
+        line-height: 25px;
+        cursor: auto;
+      }
+
       button {
         width: 170px;
         height: 50px;
 
-        margin-top: 50px;
+        margin-top: ${(props) => props.buttonMargin};
 
         border: none;
         border-radius: 25px;
@@ -142,6 +140,85 @@ const ActivationScreenStyles = styled.div`
         @media (max-width: 550px) {
           height: 45px;
           margin-top: 40px;
+        }
+      }
+
+      .loading {
+        height: 50px;
+        margin-top: ${(props) => props.buttonMargin};
+
+        display: flex;
+        align-items: center;
+
+        text-align: center;
+
+        div {
+          width: 15px;
+          height: 15px;
+
+          margin: 0 4px;
+
+          background-color: #000;
+          border-radius: 100%;
+
+          animation: bouncedelay 1.2s infinite ease-in-out both;
+        }
+
+        .dot1 {
+          animation-delay: -0.32s;
+        }
+
+        .dot2 {
+          animation-delay: -0.16s;
+        }
+
+        @keyframes bouncedelay {
+          0%,
+          80%,
+          100% {
+            transform: scale(0);
+          }
+          40% {
+            transform: scale(1);
+          }
+        }
+      }
+
+      .serverError {
+        height: 50px;
+        margin-top: ${(props) => props.buttonMargin};
+        margin-bottom: 0;
+
+        display: flex;
+        align-items: center;
+
+        animation: 0.6s appear;
+
+        img {
+          width: 30px;
+        }
+
+        p {
+          margin: 0 0 0 5px;
+
+          font-size: 14px;
+          font-style: italic;
+          line-height: 50px;
+        }
+
+        @keyframes appear {
+          0% {
+            transform: scale(0.2);
+          }
+          60% {
+            transform: scale(1);
+          }
+          80% {
+            transform: scale(0.9);
+          }
+          100% {
+            transform: scale(1);
+          }
         }
       }
     }

@@ -1,10 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import ActivationScreenStyles from './ActivationScreenStyles';
 
 const ActivationScreen = ({ email }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState('');
+  const [serverResponse, setServerResponse] = useState(null);
+
   const token = useSelector((state) => {
     if (state.user) {
       return state.user.token;
@@ -17,8 +21,28 @@ const ActivationScreen = ({ email }) => {
     });
   }, []);
 
+  const handleInputChange = ({ target: { value } }) => {
+    if (value.length <= 5) {
+      setInputValue(value.replace(/[^0-9]/, ''));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (inputValue.length === 0) {
+      return setError('Please, enter activation code');
+    } else if (inputValue.length !== 5) {
+      return setError('Activation code is too short');
+    } else {
+      setError('');
+    }
+
+    setServerResponse('loading');
+  };
+
   return (
-    <ActivationScreenStyles>
+    <ActivationScreenStyles buttonMargin={error ? '0px' : '60px'}>
       <div className='imageContainer'>
         <img src='/images/mailbox.svg' alt='mailbox' />
       </div>
@@ -30,14 +54,33 @@ const ActivationScreen = ({ email }) => {
 
         <p>
           We've sent verification code to <br />
-          <b>{email}</b> <br />
-          <span>Change email</span>
+          <b>{email}</b>
         </p>
 
-        <form>
-          <input type='text' placeholder='Enter the code' />
+        <form onSubmit={handleSubmit}>
+          <input
+            type='text'
+            placeholder='Enter the code'
+            value={inputValue}
+            onChange={handleInputChange}
+          />
           <p className='resend'>Resend my code</p>
-          <button type='submit'>Confirm</button>
+          {error ? <p className='validationError'>{error}</p> : null}
+
+          {serverResponse === null ? (
+            <button type='submit'>Confirm</button>
+          ) : serverResponse === 'loading' ? (
+            <div className='loading'>
+              <div className='dot1'></div>
+              <div className='dot2'></div>
+              <div className='dot3'></div>
+            </div>
+          ) : (
+            <div className='serverError'>
+              <img src='/images/error.svg' alt='error' />
+              <p>Something went wrong</p>
+            </div>
+          )}
         </form>
       </div>
     </ActivationScreenStyles>
