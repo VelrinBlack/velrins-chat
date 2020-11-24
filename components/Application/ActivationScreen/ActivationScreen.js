@@ -1,6 +1,22 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+
 import ActivationScreenStyles from './ActivationScreenStyles';
 
 const ActivationScreen = ({ email }) => {
+  const token = useSelector((state) => {
+    if (state.user) {
+      return state.user.token;
+    }
+  });
+
+  useEffect(() => {
+    axios.post(`${process.env.BACKEND_URL}/api/user/sendmail`, {
+      token,
+    });
+  }, []);
+
   return (
     <ActivationScreenStyles>
       <div className='imageContainer'>

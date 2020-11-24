@@ -23,7 +23,6 @@ const Application = () => {
         token,
       })
       .then((res) => {
-        console.log(res.data);
         setServerResponse(res.data);
       })
       .catch(() => {

@@ -95,12 +95,17 @@ const ActivationScreenStyles = styled.div`
 
         text-align: center;
         font-size: 18px;
+        letter-spacing: 5px;
         outline: none;
 
         @media (max-width: 550px) {
           width: 80%;
           height: 45px;
           font-size: 16px;
+        }
+
+        &::placeholder {
+          letter-spacing: 0;
         }
       }
 
