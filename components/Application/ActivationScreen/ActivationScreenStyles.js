@@ -27,6 +27,35 @@ const ActivationScreenStyles = styled.div`
     justify-content: center;
     align-items: center;
 
+    .logOut {
+      width: 130px;
+      height: 40px;
+
+      position: absolute;
+      top: 30px;
+      right: 30px;
+
+      border: none;
+      border-radius: 25px;
+      background-image: linear-gradient(to top, #0a3745 0%, #0a3745 0.01%, #1f8cae 100%);
+
+      color: #fff;
+      font-size: 15px;
+
+      outline: none;
+      cursor: pointer;
+
+      @media (max-width: 550px) {
+        right: 50%;
+        transform: translateX(50%);
+
+        background-image: none;
+        background-color: #fff;
+        border: 4px solid #1f8cae;
+        color: #000;
+      }
+    }
+
     h1 {
       font-size: clamp(40px, 2.8vw, 60px);
       text-align: center;

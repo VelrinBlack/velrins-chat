@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import ActivationScreenStyles from './ActivationScreenStyles';
+import { signOut } from '../../../redux/actions/userActions';
 
 const ActivationScreen = ({ email }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
   const [serverResponse, setServerResponse] = useState(null);
 
+  const dispatch = useDispatch();
   const token = useSelector((state) => {
     if (state.user) {
       return state.user.token;
@@ -16,10 +18,15 @@ const ActivationScreen = ({ email }) => {
   });
 
   useEffect(() => {
-    axios.post(`${process.env.BACKEND_URL}/api/user/sendmail`, {
+    axios.post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
       token,
     });
   }, []);
+
+  const handleLogOutButtonClick = () => {
+    localStorage.removeItem('token');
+    dispatch(signOut());
+  };
 
   const handleInputChange = ({ target: { value } }) => {
     if (value.length <= 5) {
@@ -48,6 +55,10 @@ const ActivationScreen = ({ email }) => {
       </div>
 
       <div className='contentContainer'>
+        <button className='logOut' onClick={handleLogOutButtonClick}>
+          Log out
+        </button>
+
         <h1>
           Check your mailbox <div className='underline'></div>
         </h1>
