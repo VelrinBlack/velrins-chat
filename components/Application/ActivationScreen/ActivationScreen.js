@@ -34,6 +34,18 @@ const ActivationScreen = ({ email }) => {
     }
   };
 
+  const handleResendButtonClick = (e) => {
+    if (e.target.textContent === 'Resend my code') {
+      e.target.textContent = 'Code sent one more time!';
+      e.target.style.cursor = 'grab';
+
+      axios.post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
+        token,
+        force: true,
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -75,11 +87,16 @@ const ActivationScreen = ({ email }) => {
             value={inputValue}
             onChange={handleInputChange}
           />
-          <p className='resend'>Resend my code</p>
+          <button type='button' className='resend' onClick={handleResendButtonClick}>
+            Resend my code
+          </button>
+
           {error ? <p className='validationError'>{error}</p> : null}
 
           {serverResponse === null ? (
-            <button type='submit'>Confirm</button>
+            <button type='submit' className='submit'>
+              Confirm
+            </button>
           ) : serverResponse === 'loading' ? (
             <div className='loading'>
               <div className='dot1'></div>

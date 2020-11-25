@@ -140,6 +140,23 @@ const ActivationScreenStyles = styled.div`
         }
       }
 
+      button {
+        margin-top: 5px;
+
+        background-color: #fff;
+        border: none;
+
+        font-size: 14px;
+        color: #505050;
+
+        cursor: pointer;
+        outline: none;
+
+        @media (max-width: 550px) {
+          font-size: 13px;
+        }
+      }
+
       .validationError {
         margin-top: 20px;
         margin-bottom: 15px;
@@ -149,7 +166,7 @@ const ActivationScreenStyles = styled.div`
         cursor: auto;
       }
 
-      button {
+      .submit {
         width: 170px;
         height: 50px;
 
