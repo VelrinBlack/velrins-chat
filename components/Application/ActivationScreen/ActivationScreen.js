@@ -18,9 +18,11 @@ const ActivationScreen = ({ email }) => {
   });
 
   useEffect(() => {
-    axios.post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
-      token,
-    });
+    axios
+      .post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
+        token,
+      })
+      .catch(() => {});
   }, []);
 
   const handleLogOutButtonClick = () => {
@@ -39,10 +41,12 @@ const ActivationScreen = ({ email }) => {
       e.target.textContent = 'Code sent one more time!';
       e.target.style.cursor = 'grab';
 
-      axios.post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
-        token,
-        force: true,
-      });
+      axios
+        .post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
+          token,
+          force: true,
+        })
+        .catch(() => {});
     }
   };
 
@@ -94,7 +98,7 @@ const ActivationScreen = ({ email }) => {
           {error ? <p className='validationError'>{error}</p> : null}
 
           {serverResponse === null ? (
-            <button type='submit' className='submit'>
+            <button type='submit' className='submit' aria-label='submit'>
               Confirm
             </button>
           ) : serverResponse === 'loading' ? (
