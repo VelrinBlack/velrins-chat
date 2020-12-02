@@ -36,7 +36,7 @@ describe('RegisterForm', () => {
     const submitButton = screen.getByLabelText('submit');
     fireEvent.click(submitButton);
 
-    const passwordError = screen.getByText('Password must contain from 7 to 20 characters');
+    const passwordError = screen.getByText('Password must contain from 7 to 30 characters');
     expect(passwordError).toBeInTheDocument();
   });
 

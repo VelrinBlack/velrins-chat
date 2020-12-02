@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { setUser } from '../redux/actions/userActions';
 import LandingPage from '../components/LandingPage/LandingPage';
 import Application from '../components/Application/Application';
-import { signIn } from '../redux/actions/userActions';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      dispatch(signIn({ token: localStorage.getItem('token') }));
+      dispatch(setUser({ token: localStorage.getItem('token') }));
     }
   }, []);
 

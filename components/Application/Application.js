@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
+import { resetUser } from '../../redux/actions/userActions';
 import LoadingScreen from './LoadingScreen/LoadingScreen';
 import ActivationScreen from './ActivationScreen/ActivationScreen';
-import { signOut } from '../../redux/actions/userActions';
 
 const Application = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Application = () => {
   });
 
   const [serverResponse, setServerResponse] = useState('loading');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     axios
@@ -23,25 +24,28 @@ const Application = () => {
         token,
       })
       .then((res) => {
-        setServerResponse(res.data);
+        setServerResponse(res.data.message);
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.response.data.message === 'User not activated') {
+          setServerResponse('User not activated');
+          setEmail(err.response.data.email);
+
+          return;
+        }
+
         localStorage.removeItem('token');
-        dispatch(signOut());
+        dispatch(resetUser());
       });
   }, []);
 
-  return (
-    <>
-      {serverResponse === 'loading' ? (
-        <LoadingScreen />
-      ) : serverResponse.message === 'User not activated' ? (
-        <ActivationScreen email={serverResponse.email} />
-      ) : (
-        <h1>Something went wrong</h1>
-      )}
-    </>
-  );
+  if (serverResponse === 'loading') {
+    return <LoadingScreen />;
+  } else if (serverResponse === 'User not activated') {
+    return <ActivationScreen email={email} />;
+  } else {
+    return <h1>{serverResponse}</h1>;
+  }
 };
 
 export default Application;

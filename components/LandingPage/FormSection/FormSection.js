@@ -9,7 +9,7 @@ const FormSection = () => {
 
   return (
     <FormSectionStyles>
-      <div className='contentContainer'>
+      <div className='formSectionContainer'>
         {formType === 'register' ? (
           <>
             <h2>Sign up now!</h2>

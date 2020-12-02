@@ -15,7 +15,8 @@ describe('ActivationScreen', () => {
 
     fireEvent.click(submitButton);
 
-    expect(screen.getByText('Please, enter activation code')).toBeInTheDocument();
+    const emptyCodeError = screen.getByText('Please, enter activation code');
+    expect(emptyCodeError).toBeInTheDocument();
   });
 
   test('Too short code error', () => {
@@ -25,12 +26,16 @@ describe('ActivationScreen', () => {
     fireEvent.change(input, { target: { value: '123' } });
     fireEvent.click(submitButton);
 
-    expect(screen.getByText('Activation code is too short')).toBeInTheDocument();
+    const tooShortCodeError = screen.getByText('Activation code is too short');
+    expect(tooShortCodeError).toBeInTheDocument();
   });
 
   test('Resend code button', () => {
     const resendCodeButton = screen.getByText('Resend my code');
+
     fireEvent.click(resendCodeButton);
-    expect(screen.getByText('Code sent one more time!')).toBeInTheDocument();
+
+    const codeSentOneMoreTimeText = screen.getByText('Code sent one more time!');
+    expect(codeSentOneMoreTimeText).toBeInTheDocument();
   });
 });

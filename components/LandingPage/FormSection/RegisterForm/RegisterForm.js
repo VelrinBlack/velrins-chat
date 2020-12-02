@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import validator from 'validator';
 import axios from 'axios';
 
-import { signIn } from '../../../../redux/actions/userActions';
+import { setUser } from '../../../../redux/actions/userActions';
 
 const RegisterForm = ({ changeToLogin }) => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const RegisterForm = ({ changeToLogin }) => {
     }
 
     if (password) {
-      setPasswordError(password.length < 7 || password.length > 20);
+      setPasswordError(password.length < 7 || password.length > 30);
     } else {
       setPasswordError(false);
     }
@@ -61,7 +61,7 @@ const RegisterForm = ({ changeToLogin }) => {
     if (
       validator.isEmail(email) &&
       password.length >= 7 &&
-      password.length <= 20 &&
+      password.length <= 30 &&
       password === repeatPassword &&
       name &&
       surname &&
@@ -79,16 +79,14 @@ const RegisterForm = ({ changeToLogin }) => {
           password,
         })
         .then((res) => {
-          if (res.data.token) {
-            localStorage.setItem('token', res.data.token);
-            dispatch(signIn({ token: res.data.token }));
-          } else if (res.data === 'User already exists') {
-            setServerResponse('User already exists');
-          } else {
-            setServerResponse('error');
-          }
+          localStorage.setItem('token', res.data.token);
+          dispatch(setUser({ token: res.data.token }));
         })
-        .catch(() => {
+        .catch((err) => {
+          if (err.response.data.message === 'User already exists') {
+            return setServerResponse('User already exists');
+          }
+
           setServerResponse('error');
         });
     }
@@ -130,7 +128,7 @@ const RegisterForm = ({ changeToLogin }) => {
         value={password}
       />
       {passwordError ? (
-        <p className='passwordError'>Password must contain from 7 to 20 characters</p>
+        <p className='passwordError'>Password must contain from 7 to 30 characters</p>
       ) : null}
 
       <input
@@ -140,7 +138,6 @@ const RegisterForm = ({ changeToLogin }) => {
         onChange={handleInputChange}
         value={repeatPassword}
       />
-
       {repeatPasswordError ? <p className='repeatPasswordError'>Passwords don't match</p> : null}
 
       {emptyFields ? <p className='emptyFieldsError'>Please fill empty fields</p> : null}

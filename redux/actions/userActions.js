@@ -1,4 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const signIn = createAction('SIGN_IN');
-export const signOut = createAction('SIGN_OUT');
+export const setUser = createAction('SET_USER');
+export const resetUser = createAction('RESET_USER');

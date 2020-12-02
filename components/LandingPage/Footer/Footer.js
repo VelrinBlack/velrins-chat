@@ -1,12 +1,10 @@
 import FooterStyles from './FooterStyles';
 
-const Footer = () => {
-  return (
-    <FooterStyles>
-      <span>Bartosz Wleciał © 2020</span>
-      <span className='email'>velrinblack@gmail.com</span>
-    </FooterStyles>
-  );
-};
+const Footer = () => (
+  <FooterStyles>
+    <span>Copyright © Bartosz Wleciał</span>
+    <span className='email'>velrinblack@gmail.com</span>
+  </FooterStyles>
+);
 
 export default Footer;

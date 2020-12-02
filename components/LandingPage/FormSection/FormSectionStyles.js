@@ -11,7 +11,7 @@ const FormSectionStyles = styled.div`
     clip-path: none;
   }
 
-  .contentContainer {
+  .formSectionContainer {
     position: relative;
 
     height: 100%;

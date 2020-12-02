@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
+import { resetUser } from '../../../redux/actions/userActions';
 import ActivationScreenStyles from './ActivationScreenStyles';
-import { signOut } from '../../../redux/actions/userActions';
 
 const ActivationScreen = ({ email }) => {
+  const dispatch = useDispatch();
+
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
   const [serverResponse, setServerResponse] = useState(null);
 
-  const dispatch = useDispatch();
   const token = useSelector((state) => {
     if (state.user) {
       return state.user.token;
@@ -19,7 +20,7 @@ const ActivationScreen = ({ email }) => {
 
   useEffect(() => {
     axios
-      .post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
+      .post(`${process.env.BACKEND_URL}/api/user/send-verification-mail`, {
         token,
       })
       .catch(() => {});
@@ -27,7 +28,7 @@ const ActivationScreen = ({ email }) => {
 
   const handleLogOutButtonClick = () => {
     localStorage.removeItem('token');
-    dispatch(signOut());
+    dispatch(resetUser());
   };
 
   const handleInputChange = ({ target: { value } }) => {
@@ -36,13 +37,13 @@ const ActivationScreen = ({ email }) => {
     }
   };
 
-  const handleResendButtonClick = (e) => {
-    if (e.target.textContent === 'Resend my code') {
-      e.target.textContent = 'Code sent one more time!';
-      e.target.style.cursor = 'grab';
+  const handleResendButtonClick = ({ target }) => {
+    if (target.textContent === 'Resend my code') {
+      target.textContent = 'Code sent one more time!';
+      target.style.cursor = 'grab';
 
       axios
-        .post(`${process.env.BACKEND_URL}/api/user/sendmail/verification`, {
+        .post(`${process.env.BACKEND_URL}/api/user/send-verification-mail`, {
           token,
           force: true,
         })
@@ -91,6 +92,7 @@ const ActivationScreen = ({ email }) => {
             value={inputValue}
             onChange={handleInputChange}
           />
+
           <button type='button' className='resend' onClick={handleResendButtonClick}>
             Resend my code
           </button>

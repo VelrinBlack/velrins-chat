@@ -1,12 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 const userReducer = createReducer(null, {
-  SIGN_IN: (state, action) => {
-    return {
-      token: action.payload.token,
-    };
+  SET_USER: (state, action) => {
+    return action.payload;
   },
-  SIGN_OUT: (state, action) => {
+  RESET_USER: (state, action) => {
     return null;
   },
 });

@@ -1,5 +1,5 @@
-const rtl = require('@testing-library/react');
 import { Provider } from 'react-redux';
+import * as rtl from '@testing-library/react';
 
 import store from './redux/store';
 

@@ -33,8 +33,8 @@ describe('LoginForm', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      const userAlreadyExistsError = screen.getByText('Invalid email or password');
-      return expect(userAlreadyExistsError).toBeInTheDocument();
+      const invalidEmailOrPasswordError = screen.getByText('Invalid email or password');
+      return expect(invalidEmailOrPasswordError).toBeInTheDocument();
     });
   });
 });
