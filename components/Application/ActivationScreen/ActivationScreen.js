@@ -1,22 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 
-import { resetUser } from '../../../redux/actions/userActions';
 import ActivationScreenStyles from './ActivationScreenStyles';
+import Context from '../../../Context';
 
 const ActivationScreen = ({ email }) => {
-  const dispatch = useDispatch();
+  const forceUpdate = useContext(Context).forceUpdate;
 
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
   const [serverResponse, setServerResponse] = useState(null);
 
-  const token = useSelector((state) => {
-    if (state.user) {
-      return state.user.token;
-    }
-  });
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     axios
@@ -28,7 +23,7 @@ const ActivationScreen = ({ email }) => {
 
   const handleLogOutButtonClick = () => {
     localStorage.removeItem('token');
-    dispatch(resetUser());
+    forceUpdate();
   };
 
   const handleInputChange = ({ target: { value } }) => {

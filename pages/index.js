@@ -1,30 +1,22 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import useForceUpdate from 'use-force-update';
 
-import { setUser } from '../redux/actions/userActions';
 import LandingPage from '../components/LandingPage/LandingPage';
 import Application from '../components/Application/Application';
+import Context from '../Context';
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const forceUpdate = useForceUpdate();
 
-  const token = useSelector((state) => {
-    if (state.user) {
-      return state.user.token;
-    }
-  });
+  let token;
+  try {
+    token = localStorage.getItem('token');
+  } catch (err) {}
 
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      dispatch(setUser({ token: localStorage.getItem('token') }));
-    }
-  }, []);
-
-  if (token) {
-    return <Application />;
-  } else {
-    return <LandingPage />;
-  }
+  return (
+    <Context.Provider value={{ forceUpdate }}>
+      {token ? <Application /> : <LandingPage />}
+    </Context.Provider>
+  );
 };
 
 export default HomePage;

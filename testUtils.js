@@ -1,10 +1,12 @@
-import { Provider } from 'react-redux';
 import * as rtl from '@testing-library/react';
+import useForceUpdate from 'use-force-update';
 
-import store from './redux/store';
+import Context from './Context';
 
 const AllTheProviders = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>;
+  const forceUpdate = useForceUpdate();
+
+  return <Context.Provider value={{ forceUpdate }}>{children}</Context.Provider>;
 };
 
 const customRender = (ui, options) =>

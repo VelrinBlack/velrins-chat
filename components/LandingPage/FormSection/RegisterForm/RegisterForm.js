@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useContext } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 
-import { setUser } from '../../../../redux/actions/userActions';
+import Context from '../../../../Context';
 
 const RegisterForm = ({ changeToLogin }) => {
-  const dispatch = useDispatch();
+  const forceUpdate = useContext(Context).forceUpdate;
 
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -80,7 +79,7 @@ const RegisterForm = ({ changeToLogin }) => {
         })
         .then((res) => {
           localStorage.setItem('token', res.data.token);
-          dispatch(setUser({ token: res.data.token }));
+          forceUpdate();
         })
         .catch((err) => {
           if (err.response.data.message === 'User already exists') {
