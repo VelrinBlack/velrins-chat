@@ -6,40 +6,38 @@ import ActivationScreen from './ActivationScreen/ActivationScreen';
 import Context from '../../Context';
 
 const Application = () => {
-  const forceUpdate = useContext(Context).forceUpdate;
+  const logOut = useContext(Context).logOut;
+  const token = useContext(Context).token;
 
-  const token = localStorage.getItem('token');
-
-  const [serverResponse, setServerResponse] = useState('loading');
   const [email, setEmail] = useState('');
+  const [isActivated, setIsActivated] = useState(null);
 
   useEffect(() => {
     axios
       .post(`${process.env.BACKEND_URL}/api/user/authorizate`, {
         token,
       })
-      .then((res) => {
-        setServerResponse(res.data.message);
+      .then(() => {
+        setIsActivated(true);
       })
       .catch((err) => {
         if (err.response.data.message === 'User not activated') {
-          setServerResponse('User not activated');
+          setIsActivated(false);
           setEmail(err.response.data.email);
 
           return;
         }
 
-        localStorage.removeItem('token');
-        forceUpdate();
+        logOut();
       });
   }, []);
 
-  if (serverResponse === 'loading') {
+  if (isActivated === null) {
     return <LoadingScreen />;
-  } else if (serverResponse === 'User not activated') {
-    return <ActivationScreen email={email} />;
+  } else if (isActivated === false) {
+    return <ActivationScreen email={email} setIsActivated={setIsActivated} />;
   } else {
-    return <h1>{serverResponse}</h1>;
+    return <h1>user is activated</h1>;
   }
 };
 

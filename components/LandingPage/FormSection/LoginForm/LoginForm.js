@@ -4,7 +4,7 @@ import axios from 'axios';
 import Context from '../../../../Context';
 
 const RegisterForm = ({ changeToRegister }) => {
-  const forceUpdate = useContext(Context).forceUpdate;
+  const logIn = useContext(Context).logIn;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,8 +35,7 @@ const RegisterForm = ({ changeToRegister }) => {
           password,
         })
         .then((res) => {
-          localStorage.setItem('token', res.data.token);
-          forceUpdate();
+          logIn(res.data.token);
         })
         .catch((err) => {
           if (err.response.data.message === 'Invalid email or password') {

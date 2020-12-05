@@ -4,8 +4,8 @@ import axios from 'axios';
 import ActivationScreenStyles from './ActivationScreenStyles';
 import Context from '../../../Context';
 
-const ActivationScreen = ({ email }) => {
-  const forceUpdate = useContext(Context).forceUpdate;
+const ActivationScreen = ({ email, setIsActivated }) => {
+  const logOut = useContext(Context).logOut;
 
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
@@ -20,11 +20,6 @@ const ActivationScreen = ({ email }) => {
       })
       .catch(() => {});
   }, []);
-
-  const handleLogOutButtonClick = () => {
-    localStorage.removeItem('token');
-    forceUpdate();
-  };
 
   const handleInputChange = ({ target: { value } }) => {
     if (value.length <= 5) {
@@ -58,6 +53,25 @@ const ActivationScreen = ({ email }) => {
     }
 
     setServerResponse('loading');
+
+    axios
+      .post(`${process.env.BACKEND_URL}/api/user/activate`, {
+        token,
+        code: inputValue,
+      })
+      .then(() => {
+        setIsActivated(true);
+      })
+      .catch((err) => {
+        if (err.response.data.message === 'Invalid verification code') {
+          setServerResponse(null);
+          setError('Invalid verification code');
+
+          return;
+        }
+
+        setServerResponse('error');
+      });
   };
 
   return (
@@ -67,7 +81,7 @@ const ActivationScreen = ({ email }) => {
       </div>
 
       <div className='contentContainer'>
-        <button className='logOut' onClick={handleLogOutButtonClick}>
+        <button className='logOut' onClick={logOut}>
           Log out
         </button>
 

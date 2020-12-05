@@ -1,12 +1,13 @@
 import * as rtl from '@testing-library/react';
-import useForceUpdate from 'use-force-update';
 
 import Context from './Context';
 
 const AllTheProviders = ({ children }) => {
-  const forceUpdate = useForceUpdate();
+  const token = null;
+  const logIn = null;
+  const logOut = null;
 
-  return <Context.Provider value={{ forceUpdate }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ token, logIn, logOut }}>{children}</Context.Provider>;
 };
 
 const customRender = (ui, options) =>
