@@ -38,7 +38,7 @@ const RegisterForm = ({ changeToRegister }) => {
           logIn(res.data.token);
         })
         .catch((err) => {
-          if (err.response.data.message === 'Invalid email or password') {
+          if (err.response.data.info === 'Invalid email or password') {
             return setServerResponse('Invalid email or password');
           }
 

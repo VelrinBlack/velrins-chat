@@ -81,7 +81,7 @@ const RegisterForm = ({ changeToLogin }) => {
           logIn(res.data.token);
         })
         .catch((err) => {
-          if (err.response.data.message === 'User already exists') {
+          if (err.response.data.info === 'User already exists') {
             return setServerResponse('User already exists');
           }
 

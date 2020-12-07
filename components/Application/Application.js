@@ -21,7 +21,7 @@ const Application = () => {
         setIsActivated(true);
       })
       .catch((err) => {
-        if (err.response.data.message === 'User not activated') {
+        if (err.response.data.info === 'User not activated') {
           setIsActivated(false);
           setEmail(err.response.data.email);
 

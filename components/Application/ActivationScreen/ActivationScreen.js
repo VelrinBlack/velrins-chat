@@ -63,7 +63,7 @@ const ActivationScreen = ({ email, setIsActivated }) => {
         setIsActivated(true);
       })
       .catch((err) => {
-        if (err.response.data.message === 'Invalid verification code') {
+        if (err.response.data.info === 'Invalid verification code') {
           setServerResponse(null);
           setError('Invalid verification code');
 
