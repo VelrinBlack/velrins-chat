@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import LoadingScreen from './LoadingScreen/LoadingScreen';
 import ActivationScreen from './ActivationScreen/ActivationScreen';
+import ApplicationScreen from './ApplicationScreen/ApplicationScreen';
 import Context from '../../Context';
 
 const Application = () => {
@@ -34,10 +35,10 @@ const Application = () => {
 
   if (isActivated === null) {
     return <LoadingScreen />;
-  } else if (isActivated === false) {
+  } else if (!isActivated) {
     return <ActivationScreen email={email} setIsActivated={setIsActivated} />;
   } else {
-    return <h1>user is activated</h1>;
+    return <ApplicationScreen />;
   }
 };
 
