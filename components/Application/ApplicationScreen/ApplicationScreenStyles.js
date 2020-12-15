@@ -88,6 +88,51 @@ const ApplicationScreenStyles = styled.div`
 
   main {
     flex: 1;
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    .chat_placeholder {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(300px, 40%, 800px);
+    }
+
+    header {
+      height: 70px;
+
+      display: flex;
+      align-items: center;
+
+      background-color: #e4e4e4;
+
+      img {
+        height: 70%;
+        margin-left: 20px;
+      }
+
+      h3 {
+        margin-left: 10px;
+        font-size: 18px;
+      }
+    }
+
+    .messages_section {
+      height: calc(100vh - 70px);
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 `;
 

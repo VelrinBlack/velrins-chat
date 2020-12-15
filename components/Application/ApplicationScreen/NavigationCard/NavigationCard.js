@@ -1,10 +1,14 @@
 import NavigationCardStyles from './NavigationCardStyles';
 
-const NavigationCard = ({ user: { name, surname }, messages }) => {
+const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat }) => {
   const message = messages[0].content;
 
   return (
-    <NavigationCardStyles>
+    <NavigationCardStyles
+      onClick={() => {
+        setActiveChat({ name, surname, messages });
+      }}
+    >
       <img src='/images/profile.png' alt='user' />
 
       <div>

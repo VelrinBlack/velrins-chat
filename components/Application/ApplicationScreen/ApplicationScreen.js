@@ -1,8 +1,9 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, createRef } from 'react';
 import axios from 'axios';
 
 import ApplicationScreenStyles from './ApplicationScreenStyles';
 import NavigationCard from './NavigationCard/NavigationCard';
+import Message from './Message/Message';
 import Context from '../../../Context';
 
 const ApplicationScreen = () => {
@@ -10,14 +11,23 @@ const ApplicationScreen = () => {
 
   const [user, setUser] = useState(null);
   const [chats, setChats] = useState([]);
+  const [activeChat, setActiveChat] = useState(null);
+
+  const messagesEndRef = createRef();
 
   useEffect(async () => {
     const res = await axios.get(`${process.env.BACKEND_URL}/api/user/getOne?token=${token}`);
-    setUser(res.data);
+    setUser(res.data.user);
 
     const res2 = await axios.get(`${process.env.BACKEND_URL}/api/chat/getAll?token=${token}`);
     setChats(res2.data.chats);
   }, []);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView();
+    }
+  }, [activeChat]);
 
   return (
     <ApplicationScreenStyles>
@@ -37,13 +47,46 @@ const ApplicationScreen = () => {
           )}
 
           {chats.map((chat) => {
-            const cardUser = chat.users.filter(({ _id }) => _id !== user.id)[0];
+            const cardUser = chat.users.find(({ _id }) => _id !== user.id);
 
-            return <NavigationCard user={cardUser} messages={chat.messages} key={chat._id} />;
+            return (
+              <NavigationCard
+                cardUser={cardUser}
+                messages={chat.messages}
+                setActiveChat={setActiveChat}
+                key={chat._id}
+              />
+            );
           })}
         </ul>
       </nav>
-      <main></main>
+
+      <main>
+        {activeChat ? (
+          <>
+            <header>
+              <img src='/images/profile.png' alt='user' />
+              <h3>
+                {activeChat.name} {activeChat.surname}
+              </h3>
+            </header>
+
+            <section className='messages_section'>
+              {activeChat.messages.map((message) => (
+                <Message
+                  content={message.content}
+                  time={message.time}
+                  receiver={user.id !== message.user}
+                />
+              ))}
+
+              <div ref={messagesEndRef}></div>
+            </section>
+          </>
+        ) : (
+          <img src='/images/chat.svg' alt='chat' className='chat_placeholder' />
+        )}
+      </main>
     </ApplicationScreenStyles>
   );
 };
