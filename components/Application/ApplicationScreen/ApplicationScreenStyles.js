@@ -123,6 +123,9 @@ const ApplicationScreenStyles = styled.div`
     width: 100%;
     height: 100%;
 
+    display: flex;
+    flex-direction: column;
+
     .chat_placeholder {
       position: absolute;
       top: 50%;
@@ -151,7 +154,7 @@ const ApplicationScreenStyles = styled.div`
     }
 
     .messages_section {
-      height: calc(100vh - 70px);
+      flex: 1;
 
       display: flex;
       flex-direction: column;

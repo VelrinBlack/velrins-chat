@@ -5,6 +5,7 @@ import Pusher from 'pusher-js';
 import ApplicationScreenStyles from './ApplicationScreenStyles';
 import NavigationCard from './NavigationCard/NavigationCard';
 import Message from './Message/Message';
+import SendMessageForm from './SendMessageForm/SendMessageForm';
 import Context from '../../../Context';
 
 const ApplicationScreen = () => {
@@ -79,6 +80,7 @@ const ApplicationScreen = () => {
                 cardUser={cardUser}
                 messages={chat.messages}
                 setActiveChat={setActiveChat}
+                id={chat._id}
                 key={chat._id}
               />
             );
@@ -107,6 +109,8 @@ const ApplicationScreen = () => {
 
               <div ref={messagesEndRef}></div>
             </section>
+
+            <SendMessageForm chatId={activeChat.id} userId={user.id} />
           </>
         ) : (
           <img src='/images/chat.svg' alt='chat' className='chat_placeholder' />
