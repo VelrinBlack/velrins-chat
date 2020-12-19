@@ -8,6 +8,7 @@ import Message from './Message/Message';
 import Context from '../../../Context';
 
 const ApplicationScreen = () => {
+  const logOut = useContext(Context).logOut;
   const token = useContext(Context).token;
 
   const [user, setUser] = useState(null);
@@ -51,8 +52,14 @@ const ApplicationScreen = () => {
     <ApplicationScreenStyles>
       <nav>
         <header>
-          <img src='/images/profile.png' alt='user' />
-          <h2>{user && `${user.name} ${user.surname}`}</h2>
+          <button className='logout' onClick={logOut}>
+            <img src='/images/logout.svg' alt='logout' />
+          </button>
+
+          <div className='container'>
+            <img src='/images/profile.png' alt='user' />
+            <h2>{user && `${user.name} ${user.surname}`}</h2>
+          </div>
         </header>
 
         <ul>

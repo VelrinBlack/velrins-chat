@@ -12,20 +12,50 @@ const ApplicationScreenStyles = styled.div`
       height: 250px;
 
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
 
       background-image: linear-gradient(to top right, #1f8cae 0%, #1b6177 0.01%, #0a3745 100%);
 
-      img {
-        width: 130px;
-        margin-bottom: 20px;
-        border-radius: 100px;
+      .logout {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 50px;
+        height: 50px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+        cursor: pointer;
+
+        img {
+          width: 30px;
+          height: 30px;
+        }
       }
 
-      h2 {
-        color: #fff;
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 130px;
+          margin-bottom: 20px;
+          border-radius: 100px;
+        }
+
+        h2 {
+          color: #fff;
+        }
       }
     }
 
