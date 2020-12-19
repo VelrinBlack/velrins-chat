@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const MessageStyles = styled.div`
   margin: 40px 20px -30px 20px;
+  width: min-content;
 
   display: flex;
   flex-direction: column;
@@ -14,10 +15,6 @@ const MessageStyles = styled.div`
       background-image: none;
       background-color: #e4e4e4;
       color: #000;
-    }
-
-    time {
-      align-self: flex-start;
     }
   }
 
@@ -33,10 +30,11 @@ const MessageStyles = styled.div`
   }
 
   time {
-    margin: 0 20px;
+    align-self: center;
+    white-space: nowrap;
 
     color: #8b8b8b;
-    font-size: 14px;
+    font-size: 10px;
   }
 `;
 
