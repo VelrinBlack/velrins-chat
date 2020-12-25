@@ -19,15 +19,15 @@ const ApplicationScreen = () => {
   const messagesEndRef = createRef();
 
   useEffect(async () => {
-    const res1 = await axios.get(`${process.env.BACKEND_URL}/api/user/getOne?token=${token}`);
+    const res1 = await axios.get(`${process.env.BACKEND_URL}/api/users/${token}`);
     const user = res1.data.user;
     setUser(user);
 
-    const res2 = await axios.get(`${process.env.BACKEND_URL}/api/chat/getAll?token=${token}`);
+    const res2 = await axios.get(`${process.env.BACKEND_URL}/api/chats/?token=${token}`);
     const chats = res2.data.chats;
     setChats(chats);
 
-    const pusher = new Pusher('ed13948a7c4618e48dbc', {
+    const pusher = new Pusher('46413e396849fbb5ff63', {
       cluster: 'us3',
     });
 

@@ -18,7 +18,7 @@ const SendMessageForm = ({ chatId, userId }) => {
 
     if (inputValue) {
       setInputValue('');
-      axios.post(`${process.env.BACKEND_URL}/api/chat/createMessage`, {
+      axios.post(`${process.env.BACKEND_URL}/api/chats/message`, {
         token,
         chatId,
         userId,

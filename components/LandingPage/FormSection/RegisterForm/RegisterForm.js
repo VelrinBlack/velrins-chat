@@ -71,7 +71,7 @@ const RegisterForm = ({ changeToLogin }) => {
       setServerResponse('loading');
 
       axios
-        .post(`${process.env.BACKEND_URL}/api/user/register`, {
+        .post(`${process.env.BACKEND_URL}/api/users/register`, {
           name,
           surname,
           email,

@@ -15,7 +15,7 @@ const Application = () => {
 
   useEffect(() => {
     axios
-      .post(`${process.env.BACKEND_URL}/api/user/authorizate`, {
+      .post(`${process.env.BACKEND_URL}/api/users/authorizate`, {
         token,
       })
       .then(() => {

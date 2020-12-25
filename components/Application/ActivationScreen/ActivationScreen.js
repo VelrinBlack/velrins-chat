@@ -15,7 +15,7 @@ const ActivationScreen = ({ email, setIsActivated }) => {
 
   useEffect(() => {
     axios
-      .post(`${process.env.BACKEND_URL}/api/user/send-verification-mail`, {
+      .post(`${process.env.BACKEND_URL}/api/users/send-verification-mail`, {
         token,
       })
       .catch(() => {});
@@ -33,7 +33,7 @@ const ActivationScreen = ({ email, setIsActivated }) => {
       target.style.cursor = 'grab';
 
       axios
-        .post(`${process.env.BACKEND_URL}/api/user/send-verification-mail`, {
+        .post(`${process.env.BACKEND_URL}/api/users/send-verification-mail`, {
           token,
           force: true,
         })
@@ -55,7 +55,7 @@ const ActivationScreen = ({ email, setIsActivated }) => {
     setServerResponse('loading');
 
     axios
-      .post(`${process.env.BACKEND_URL}/api/user/activate`, {
+      .patch(`${process.env.BACKEND_URL}/api/users/activate`, {
         token,
         code: inputValue,
       })
