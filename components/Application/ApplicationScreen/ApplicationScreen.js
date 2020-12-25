@@ -4,6 +4,7 @@ import Pusher from 'pusher-js';
 
 import ApplicationScreenStyles from './ApplicationScreenStyles';
 import NavigationCard from './NavigationCard/NavigationCard';
+import CreateChat from './CreateChat/CreateChat';
 import Message from './Message/Message';
 import SendMessageForm from './SendMessageForm/SendMessageForm';
 import Context from '../../../Context';
@@ -86,6 +87,8 @@ const ApplicationScreen = () => {
             );
           })}
         </ul>
+
+        <CreateChat />
       </nav>
 
       <main>

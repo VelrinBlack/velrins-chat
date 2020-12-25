@@ -6,6 +6,10 @@ const ApplicationScreenStyles = styled.div`
 
   nav {
     width: clamp(400px, 25vw, 550px);
+
+    display: flex;
+    flex-direction: column;
+
     background-color: #0a3745;
 
     header {
@@ -60,9 +64,9 @@ const ApplicationScreenStyles = styled.div`
     }
 
     ul {
-      height: calc(100% - 250px);
-      padding-top: 20px;
+      flex: 1;
 
+      padding-top: 20px;
       overflow-y: scroll;
 
       .loading {
