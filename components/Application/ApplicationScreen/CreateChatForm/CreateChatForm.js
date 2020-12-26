@@ -1,17 +1,31 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import axios from 'axios';
 
-import CreateChatStyles from './CreateChatStyles';
+import CreateChatFormStyles from './CreateChatFormStyles';
+import Context from '../../../../Context';
 
-const CreateChatButton = () => {
+const CreateChatForm = ({ setChats }) => {
+  const token = useContext(Context).token;
+
   const [active, setActive] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios
+      .post(`${process.env.BACKEND_URL}/api/chats`, {
+        token,
+        email: inputValue,
+      })
+      .then((res) => setChats((chats) => [...chats, res.data]))
+      .catch((err) => {});
+
+    setInputValue('');
   };
 
   return (
-    <CreateChatStyles>
+    <CreateChatFormStyles>
       {active && (
         <form onSubmit={handleSubmit}>
           <button type='button' className='close' onClick={() => setActive(false)}>
@@ -37,8 +51,8 @@ const CreateChatButton = () => {
           <span>Create new chat</span>
         </button>
       )}
-    </CreateChatStyles>
+    </CreateChatFormStyles>
   );
 };
 
-export default CreateChatButton;
+export default CreateChatForm;
