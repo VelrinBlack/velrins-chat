@@ -1,7 +1,10 @@
 import NavigationCardStyles from './NavigationCardStyles';
 
 const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, id }) => {
-  const message = messages[0].content;
+  let message = null;
+  if (messages.length) {
+    message = messages[messages.length - 1].content;
+  }
 
   return (
     <NavigationCardStyles
@@ -15,7 +18,7 @@ const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, 
         <h3>
           {name} {surname}
         </h3>
-        <p>{message.length > 25 ? `${message.substring(0, 25)}...` : message}</p>
+        {message && <p>{message.length > 25 ? `${message.substring(0, 25)}...` : message}</p>}
       </div>
     </NavigationCardStyles>
   );
