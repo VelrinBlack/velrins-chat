@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 
-const ContentSectionStyles = styled.div`
-  flex: 1;
+const MobileStyles = styled.div`
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 
-  .logoSection {
-    width: 100%;
-    padding-left: 20px;
+  header {
+    position: absolute;
+    top: 10px;
+
+    width: auto;
+
+    margin-bottom: 50px;
+    padding: 0;
 
     display: flex;
     align-items: center;
@@ -22,6 +28,8 @@ const ContentSectionStyles = styled.div`
       padding-left: 5px;
 
       h1 {
+        margin: 0;
+
         font-size: 24px;
         line-height: 1;
 
@@ -37,31 +45,24 @@ const ContentSectionStyles = styled.div`
     }
   }
 
-  .mainSection {
-    height: 100%;
-
+  main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
-    h2 {
-      width: clamp(300px, 25vw, 750px);
-
-      font-size: clamp(40px, 3vw, 90px);
-      text-align: center;
-
-      background-image: linear-gradient(272.11deg, #0a3745 3.56%, #1e7f9d 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
 
     img {
-      width: clamp(270px, 25vw, 800px);
-      margin-top: clamp(40px, 5vw, 100px);
-      margin-bottom: 100px;
+      width: 80%;
+    }
+
+    h1 {
+      width: 80%;
+
+      margin-top: 30px;
+
+      text-align: center;
+      font-size: 25px;
     }
   }
 `;
 
-export default ContentSectionStyles;
+export default MobileStyles;

@@ -7,10 +7,6 @@ const FormSectionStyles = styled.div`
   clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0% 100%);
   overflow-y: hidden;
 
-  @media (max-width: 1280px) {
-    clip-path: none;
-  }
-
   .formSectionContainer {
     position: relative;
 
@@ -22,18 +18,10 @@ const FormSectionStyles = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media (max-width: 1280px) {
-      margin-left: 0;
-    }
-
     h2 {
       color: #fff;
       font-size: clamp(40px, 3vw, 90px);
       text-align: center;
-
-      @media (max-width: 1280px) {
-        margin-top: 50px;
-      }
     }
 
     form {
@@ -44,26 +32,14 @@ const FormSectionStyles = styled.div`
       flex-direction: column;
       align-items: center;
 
-      @media (max-width: 1280px) {
-        margin-bottom: 50px;
-      }
-
       .container {
         width: 100%;
 
         display: flex;
         justify-content: space-between;
 
-        @media (max-width: 768px) {
-          flex-direction: column;
-        }
-
         input {
           width: 49.5%;
-
-          @media (max-width: 768px) {
-            width: 100%;
-          }
         }
       }
 

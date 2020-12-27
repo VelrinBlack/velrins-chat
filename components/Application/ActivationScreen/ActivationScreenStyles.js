@@ -11,10 +11,6 @@ const ActivationScreenStyles = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 1400px) {
-      display: none;
-    }
-
     img {
       width: clamp(500px, 32vw, 700px);
     }
@@ -44,25 +40,11 @@ const ActivationScreenStyles = styled.div`
 
       outline: none;
       cursor: pointer;
-
-      @media (max-width: 550px) {
-        right: 50%;
-        transform: translateX(50%);
-
-        background-image: none;
-        background-color: #fff;
-        border: 4px solid #1f8cae;
-        color: #000;
-      }
     }
 
     h1 {
       font-size: clamp(40px, 2.8vw, 60px);
       text-align: center;
-
-      @media (max-width: 550px) {
-        font-size: 30px;
-      }
     }
 
     .underline {
@@ -72,11 +54,6 @@ const ActivationScreenStyles = styled.div`
       margin: 30px auto 0 auto;
 
       background-image: linear-gradient(to right, #0a3745 0%, #0a3745 0.01%, #1f8cae 100%);
-
-      @media (max-width: 550px) {
-        margin-top: 20px;
-        height: 3px;
-      }
     }
 
     p {
@@ -84,11 +61,6 @@ const ActivationScreenStyles = styled.div`
 
       text-align: center;
       font-size: 18px;
-
-      @media (max-width: 550px) {
-        margin-top: 40px;
-        font-size: 16px;
-      }
     }
 
     form {
@@ -99,10 +71,6 @@ const ActivationScreenStyles = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      @media (max-width: 550px) {
-        margin-top: 40px;
-      }
 
       input {
         width: clamp(450px, 30vw, 600px);
@@ -116,12 +84,6 @@ const ActivationScreenStyles = styled.div`
         letter-spacing: 5px;
         outline: none;
 
-        @media (max-width: 550px) {
-          width: 80%;
-          height: 45px;
-          font-size: 16px;
-        }
-
         &::placeholder {
           letter-spacing: 0;
         }
@@ -134,10 +96,6 @@ const ActivationScreenStyles = styled.div`
         color: #505050;
 
         cursor: pointer;
-
-        @media (max-width: 550px) {
-          font-size: 13px;
-        }
       }
 
       button {
@@ -151,10 +109,6 @@ const ActivationScreenStyles = styled.div`
 
         cursor: pointer;
         outline: none;
-
-        @media (max-width: 550px) {
-          font-size: 13px;
-        }
       }
 
       .validationError {
@@ -182,11 +136,6 @@ const ActivationScreenStyles = styled.div`
 
         outline: none;
         cursor: pointer;
-
-        @media (max-width: 550px) {
-          height: 45px;
-          margin-top: 40px;
-        }
       }
 
       .loading {
