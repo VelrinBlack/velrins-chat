@@ -1,5 +1,5 @@
 module.exports = {
   env: {
-    BACKEND_URL: 'http://localhost:5000',
+    BACKEND_URL: 'https://env1257.uffizziapp.com',
   },
 };
