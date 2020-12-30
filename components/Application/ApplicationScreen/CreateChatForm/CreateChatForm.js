@@ -18,10 +18,12 @@ const CreateChatForm = ({ setChats }) => {
         token,
         email: inputValue,
       })
-      .then((res) => setChats((chats) => [...chats, res.data]))
+      .then((res) => {
+        setChats((chats) => [...chats, res.data]);
+        setActive(false);
+        setInputValue('');
+      })
       .catch((err) => {});
-
-    setInputValue('');
   };
 
   return (
