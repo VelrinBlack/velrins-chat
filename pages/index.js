@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import Head from 'next/head';
 
 import LandingPage from '../components/LandingPage/LandingPage';
 import Application from '../components/Application/Application';
@@ -32,6 +33,11 @@ const HomePage = () => {
 
   return (
     <>
+      <Head>
+        <title>Velrin's Chat</title>
+        <link rel='shortcut icon' type='image/jpg' href='/images/logo.png' />
+      </Head>
+
       {mobile ? (
         <Mobile />
       ) : (
