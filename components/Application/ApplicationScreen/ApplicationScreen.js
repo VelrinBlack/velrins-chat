@@ -20,11 +20,15 @@ const ApplicationScreen = () => {
   const messagesEndRef = createRef();
 
   useEffect(async () => {
-    const res1 = await axios.get(`${process.env.BACKEND_URL}/api/users/${token}`);
+    const res1 = await axios.get(`${process.env.BACKEND_URL}/api/users/getOne`, {
+      headers: { 'x-auth-token': token },
+    });
     const user = res1.data.user;
     setUser(user);
 
-    const res2 = await axios.get(`${process.env.BACKEND_URL}/api/chats/?token=${token}`);
+    const res2 = await axios.get(`${process.env.BACKEND_URL}/api/chats`, {
+      headers: { 'x-auth-token': token },
+    });
     const chats = res2.data.chats;
     setChats(chats);
   }, []);

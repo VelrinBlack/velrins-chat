@@ -15,8 +15,8 @@ const Application = () => {
 
   useEffect(() => {
     axios
-      .post(`${process.env.BACKEND_URL}/api/users/authorizate`, {
-        token,
+      .post(`${process.env.BACKEND_URL}/api/users/authorizate`, null, {
+        headers: { 'x-auth-token': token },
       })
       .then(() => {
         setIsActivated(true);

@@ -14,10 +14,15 @@ const CreateChatForm = ({ setChats }) => {
     e.preventDefault();
 
     axios
-      .post(`${process.env.BACKEND_URL}/api/chats`, {
-        token,
-        email: inputValue,
-      })
+      .post(
+        `${process.env.BACKEND_URL}/api/chats`,
+        {
+          email: inputValue,
+        },
+        {
+          headers: { 'x-auth-token': token },
+        },
+      )
       .then((res) => {
         setChats((chats) => [...chats, res.data]);
         setActive(false);
