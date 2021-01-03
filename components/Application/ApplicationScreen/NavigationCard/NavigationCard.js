@@ -20,6 +20,7 @@ const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, 
         headers: { 'x-auth-token': token },
       })
       .then(() => {
+        setActiveChat(null);
         setModalActive(false);
         setChats((chats) => {
           return chats.filter((chat) => chat._id !== id);
