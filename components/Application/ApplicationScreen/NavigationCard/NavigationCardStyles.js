@@ -5,7 +5,7 @@ const NavigationCardStyles = styled.div`
   padding: 20px 0;
 
   display: inline-grid;
-  grid-template-columns: 10px 50px 1fr 30px 10px;
+  grid-template-columns: 15px 50px 1fr 30px 15px;
 
   color: #fff;
   cursor: pointer;

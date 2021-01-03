@@ -1,14 +1,32 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import axios from 'axios';
 
 import NavigationCardStyles from './NavigationCardStyles';
+import Context from '../../../../Context';
 
-const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, id }) => {
+const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, setChats, id }) => {
   let message = null;
   if (messages.length) {
     message = messages[messages.length - 1].content;
   }
 
+  const token = useContext(Context).token;
+
   const [modalActive, setModalActive] = useState(false);
+
+  const deleteChat = () => {
+    axios
+      .delete(`${process.env.BACKEND_URL}/api/chats/${id}`, {
+        headers: { 'x-auth-token': token },
+      })
+      .then(() => {
+        setModalActive(false);
+        setChats((chats) => {
+          return chats.filter((chat) => chat._id !== id);
+        });
+      })
+      .catch((err) => {});
+  };
 
   return (
     <NavigationCardStyles
@@ -49,7 +67,9 @@ const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, 
             </div>
 
             <div>
-              <button className='yes'>Yes</button>
+              <button className='yes' onClick={deleteChat}>
+                Yes
+              </button>
             </div>
           </div>
         </div>

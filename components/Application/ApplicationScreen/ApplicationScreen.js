@@ -98,6 +98,7 @@ const ApplicationScreen = () => {
                       cardUser={cardUser}
                       messages={chat.messages}
                       setActiveChat={setActiveChat}
+                      setChats={setChats}
                       id={chat._id}
                     />
                   </div>
