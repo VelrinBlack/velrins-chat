@@ -23,23 +23,13 @@ const ApplicationScreen = () => {
     const res1 = await axios.get(`${process.env.BACKEND_URL}/api/users/getOne`, {
       headers: { 'x-auth-token': token },
     });
-    const user = res1.data.user;
-    setUser(user);
+    setUser(res1.data.user);
 
     const res2 = await axios.get(`${process.env.BACKEND_URL}/api/chats`, {
       headers: { 'x-auth-token': token },
     });
-    const chats = res2.data.chats;
-    setChats(chats);
-  }, []);
+    setChats(res2.data.chats);
 
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView();
-    }
-  }, [activeChat, chats]);
-
-  useEffect(() => {
     const pusher = new Pusher('46413e396849fbb5ff63', {
       cluster: 'us3',
     });
@@ -49,20 +39,26 @@ const ApplicationScreen = () => {
     channel.bind('send-message', (data) => {
       if (user.id === data.message.user) return;
 
-      const chatIndex = chats.findIndex((chat) => chat._id === data.chatId);
-      let newChats = [...chats];
+      setChats((chats) => {
+        const chatIndex = chats.findIndex((chat) => chat._id === data.chatId);
+        let newChats = [...chats];
 
-      if (newChats[chatIndex]) {
         newChats[chatIndex].messages.push(data.message);
-        setChats(newChats);
-      }
+        return newChats;
+      });
     });
 
     return () => {
       channel.unbind('send-message');
       pusher.unsubscribe('messages');
     };
-  }, [chats]);
+  }, []);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView();
+    }
+  }, [activeChat, chats]);
 
   return (
     <ApplicationScreenStyles>
