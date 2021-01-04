@@ -4,7 +4,7 @@ import axios from 'axios';
 import SendMessageFormStyles from './SendMessageFormStyles';
 import Context from '../../../../Context';
 
-const SendMessageForm = ({ chatId, userId }) => {
+const SendMessageForm = ({ chatId, userId, setChats, activeChat, chats }) => {
   const token = useContext(Context).token;
 
   const [inputValue, setInputValue] = useState('');
@@ -17,7 +17,19 @@ const SendMessageForm = ({ chatId, userId }) => {
     e.preventDefault();
 
     if (inputValue) {
+      const chatIndex = chats.findIndex((chat) => chat._id === activeChat.id);
+      let newChats = [...chats];
+
+      newChats[chatIndex].messages.push({
+        content: inputValue,
+        time: new Date(),
+        user: userId,
+      });
+
+      setChats(newChats);
+
       setInputValue('');
+
       axios.post(
         `${process.env.BACKEND_URL}/api/chats/message`,
         {
