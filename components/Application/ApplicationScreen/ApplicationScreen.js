@@ -7,6 +7,7 @@ import NavigationCard from './NavigationCard/NavigationCard';
 import CreateChatForm from './CreateChatForm/CreateChatForm';
 import Message from './Message/Message';
 import SendMessageForm from './SendMessageForm/SendMessageForm';
+import Settings from './Settings/Settings';
 import Context from '../../../Context';
 
 const ApplicationScreen = () => {
@@ -16,6 +17,7 @@ const ApplicationScreen = () => {
   const [user, setUser] = useState(null);
   const [chats, setChats] = useState(null);
   const [activeChat, setActiveChat] = useState(null);
+  const [settingsActive, setSettingsActive] = useState(false);
 
   const messagesEndRef = createRef();
 
@@ -66,6 +68,10 @@ const ApplicationScreen = () => {
         <header>
           <button className='logout' onClick={logOut}>
             <img src='/images/logout.svg' alt='logout' />
+          </button>
+
+          <button className='open_settings' onClick={() => setSettingsActive(true)}>
+            <img src='/images/settings.svg' alt='settings' />
           </button>
 
           <div className='container'>
@@ -142,6 +148,10 @@ const ApplicationScreen = () => {
           <img src='/images/chat.svg' alt='chat' className='chat_placeholder' />
         )}
       </main>
+
+      {settingsActive && (
+        <Settings user={user} setUser={setUser} setSettingsActive={setSettingsActive} />
+      )}
     </ApplicationScreenStyles>
   );
 };

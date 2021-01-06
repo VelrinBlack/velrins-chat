@@ -13,6 +13,8 @@ const ApplicationScreenStyles = styled.div`
     background-color: #0a3745;
 
     header {
+      position: relative;
+
       height: 250px;
 
       display: flex;
@@ -21,9 +23,8 @@ const ApplicationScreenStyles = styled.div`
 
       background-image: linear-gradient(to top right, #1f8cae 0%, #1b6177 0.01%, #0a3745 100%);
 
-      .logout {
+      button {
         position: absolute;
-        left: 0;
         top: 0;
 
         width: 50px;
@@ -42,6 +43,14 @@ const ApplicationScreenStyles = styled.div`
         img {
           width: 30px;
           height: 30px;
+        }
+
+        &.logout {
+          left: 0;
+        }
+
+        &.open_settings {
+          right: 0;
         }
       }
 
