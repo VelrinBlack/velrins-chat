@@ -39,8 +39,6 @@ const ApplicationScreen = () => {
     const channel = pusher.subscribe('messages');
 
     channel.bind('send-message', (data) => {
-      if (user.id === data.message.user) return;
-
       setChats((chats) => {
         const chatIndex = chats.findIndex((chat) => chat._id === data.chatId);
         let newChats = [...chats];
@@ -136,13 +134,7 @@ const ApplicationScreen = () => {
               <div ref={messagesEndRef}></div>
             </section>
 
-            <SendMessageForm
-              chatId={activeChat.id}
-              userId={user.id}
-              setChats={setChats}
-              activeChat={activeChat}
-              chats={chats}
-            />
+            <SendMessageForm chatId={activeChat.id} userId={user.id} />
           </>
         ) : (
           <img src='/images/chat.svg' alt='chat' className='chat_placeholder' />

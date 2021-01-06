@@ -17,17 +17,6 @@ const SendMessageForm = ({ chatId, userId, setChats, activeChat, chats }) => {
     e.preventDefault();
 
     if (inputValue) {
-      const chatIndex = chats.findIndex((chat) => chat._id === activeChat.id);
-      let newChats = [...chats];
-
-      newChats[chatIndex].messages.push({
-        content: inputValue,
-        time: new Date(),
-        user: userId,
-      });
-
-      setChats(newChats);
-
       setInputValue('');
 
       axios.post(
