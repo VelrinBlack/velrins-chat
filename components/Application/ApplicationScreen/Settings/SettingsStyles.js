@@ -60,6 +60,47 @@ const SettingsStyles = styled.div`
           }
         }
 
+        .loading {
+          height: 30px;
+          margin-top: 30px;
+
+          display: flex;
+          align-items: center;
+
+          text-align: center;
+
+          div {
+            width: 12px;
+            height: 12px;
+
+            margin: 0 3px;
+
+            background-color: #000;
+            border-radius: 100%;
+
+            animation: bouncedelay 1.2s infinite ease-in-out both;
+          }
+
+          .dot1 {
+            animation-delay: -0.32s;
+          }
+
+          .dot2 {
+            animation-delay: -0.16s;
+          }
+
+          @keyframes bouncedelay {
+            0%,
+            80%,
+            100% {
+              transform: scale(0);
+            }
+            40% {
+              transform: scale(1);
+            }
+          }
+        }
+
         button {
           margin-top: 20px;
           padding: 10px 20px;
