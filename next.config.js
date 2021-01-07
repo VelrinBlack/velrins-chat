@@ -1,5 +1,5 @@
 module.exports = {
   env: {
-    BACKEND_URL: 'https://env1257.uffizziapp.com',
+    BACKEND_URL: 'https://velrinblack-velrins-chat-backend.zeet.app',
   },
 };
