@@ -17,8 +17,8 @@ const NavigationCardStyles = styled.div`
   .profileImg {
     grid-column: 2;
 
-    width: 100%;
-    height: 100%;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 25px;
   }
