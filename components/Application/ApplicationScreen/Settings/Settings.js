@@ -9,6 +9,7 @@ const Settings = ({ user, setUser, setSettingsActive }) => {
 
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
+  const [image, setImage] = useState(user.image);
 
   const [serverResponse, setServerResponse] = useState(null);
 
@@ -19,6 +20,23 @@ const Settings = ({ user, setUser, setSettingsActive }) => {
       case 'surname':
         return setSurname(target.value);
     }
+  };
+
+  const handleImageInputChange = ({ target }) => {
+    if (!target.files[0]) return;
+
+    if (target.files[0].size > 100000) {
+      return alert('This image is too large! \nPlease select image up to 100 kB');
+    }
+
+    const reader = new FileReader();
+    const file = target.files[0];
+
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
   };
 
   const handleSubmit = (e) => {
@@ -32,6 +50,7 @@ const Settings = ({ user, setUser, setSettingsActive }) => {
           id: user.id,
           name,
           surname,
+          image,
         },
         {
           headers: {
@@ -45,6 +64,7 @@ const Settings = ({ user, setUser, setSettingsActive }) => {
             ...user,
             name,
             surname,
+            image,
           };
         });
         setSettingsActive(false);
@@ -61,7 +81,19 @@ const Settings = ({ user, setUser, setSettingsActive }) => {
           <h2>Settings</h2>
 
           <form onSubmit={handleSubmit}>
-            <img src='/images/profile.png' alt='profile' />
+            <div className='imageField'>
+              <input
+                type='file'
+                accept='image/png, image/jpeg, image/webp'
+                onChange={handleImageInputChange}
+              />
+              <img
+                src={image || '/images/profile.png'}
+                alt='profile image'
+                className='profileImage'
+              />
+              <img src='/images/edit.svg' alt='edit icon' className='editIcon' />
+            </div>
 
             <div className='nameField'>
               <label htmlFor='name'>Name: </label>

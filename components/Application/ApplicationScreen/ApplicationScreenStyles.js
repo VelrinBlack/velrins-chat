@@ -62,6 +62,8 @@ const ApplicationScreenStyles = styled.div`
 
         img {
           width: 130px;
+          height: 130px;
+          object-fit: cover;
           margin-bottom: 20px;
           border-radius: 100px;
         }
@@ -156,8 +158,12 @@ const ApplicationScreenStyles = styled.div`
       background-color: #e4e4e4;
 
       img {
-        height: 70%;
+        width: 50px;
+        height: 50px;
         margin-left: 20px;
+
+        object-fit: cover;
+        border-radius: 100%;
       }
 
       h3 {

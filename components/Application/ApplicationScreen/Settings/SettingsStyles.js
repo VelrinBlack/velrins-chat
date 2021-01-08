@@ -37,11 +37,57 @@ const SettingsStyles = styled.div`
         flex-direction: column;
         align-items: center;
 
-        img {
-          width: 150px;
+        .imageField {
+          position: relative;
+
+          * {
+          }
+
+          &:hover {
+            .profileImage {
+              filter: brightness(60%);
+            }
+            .editIcon {
+              display: block;
+            }
+          }
+
+          input {
+            display: block;
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            opacity: 0;
+            z-index: 1;
+            cursor: pointer;
+          }
+
+          .profileImage {
+            width: 150px;
+            height: 150px;
+
+            object-fit: cover;
+            border-radius: 100%;
+            box-shadow: 0 0 30px -10px #616161;
+          }
+
+          .editIcon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 40px;
+            display: none;
+
+            filter: drop-shadow(0 0 5px black);
+          }
         }
 
-        div {
+        .nameField,
+        .surnameField {
           &.nameField {
             margin-top: 20px;
           }

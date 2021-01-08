@@ -72,10 +72,14 @@ const ApplicationScreen = () => {
             <img src='/images/settings.svg' alt='settings' />
           </button>
 
-          <div className='container'>
-            <img src='/images/profile.png' alt='user' />
-            <h2>{user && `${user.name} ${user.surname}`}</h2>
-          </div>
+          {user && (
+            <div className='container'>
+              <img src={user.image || '/images/profile.png'} alt='user' />
+              <h2>
+                {user.name} {user.surname}
+              </h2>
+            </div>
+          )}
         </header>
 
         <ul>
@@ -115,7 +119,7 @@ const ApplicationScreen = () => {
         {activeChat ? (
           <>
             <header>
-              <img src='/images/profile.png' alt='user' />
+              <img src={activeChat.image || '/images/profile.png'} alt='user' />
               <h3>
                 {activeChat.name} {activeChat.surname}
               </h3>

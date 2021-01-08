@@ -4,7 +4,13 @@ import axios from 'axios';
 import NavigationCardStyles from './NavigationCardStyles';
 import Context from '../../../../Context';
 
-const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, setChats, id }) => {
+const NavigationCard = ({
+  cardUser: { name, surname, image },
+  messages,
+  setActiveChat,
+  setChats,
+  id,
+}) => {
   let message = null;
   if (messages.length) {
     message = messages[messages.length - 1].content;
@@ -37,11 +43,11 @@ const NavigationCard = ({ cardUser: { name, surname }, messages, setActiveChat, 
           target.className !== 'no' &&
           target.className !== 'yes'
         ) {
-          setActiveChat({ name, surname, messages, id });
+          setActiveChat({ name, surname, messages, image, id });
         }
       }}
     >
-      <img src='/images/profile.png' alt='user' className='profileImg' />
+      <img src={image || '/images/profile.png'} alt='user' className='profileImg' />
 
       <div>
         <h3>
