@@ -31,7 +31,9 @@ const HomePage = () => {
     <>
       <Head>
         <title>Velrin's Chat</title>
+        <meta name='description' content='Take your chats to the next level!' />
         <link rel='shortcut icon' type='image/jpg' href='/images/logo.png' />
+
         <meta property='og:title' content="Velrin's Chat" />
         <meta property='og:image' content='/images/logo.png' />
         <meta property='og:description' content='Take your chats to the next level!' />
