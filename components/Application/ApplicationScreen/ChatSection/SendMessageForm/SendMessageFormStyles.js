@@ -5,9 +5,14 @@ const SendMessageFormStyles = styled.div`
     margin: 5px 20px;
     display: flex;
 
+    @media (max-width: 768px) {
+      margin: 10px 10px;
+    }
+
     input {
       flex: 1;
 
+      width: 100%;
       height: 40px;
 
       margin-right: 10px;

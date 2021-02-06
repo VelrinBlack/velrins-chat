@@ -6,3 +6,13 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

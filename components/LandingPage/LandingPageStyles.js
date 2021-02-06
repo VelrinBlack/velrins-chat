@@ -10,6 +10,10 @@ const LandingPageStyles = styled.div`
     position: relative;
     flex: 1;
     display: flex;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
   }
 `;
 

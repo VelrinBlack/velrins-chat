@@ -23,6 +23,17 @@ const SettingsStyles = styled.div`
       background-color: #fff;
       border-radius: 20px;
 
+      @media (max-width: 768px) {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        border-radius: 0;
+      }
+
       h2 {
         margin-top: 20px;
 
@@ -39,9 +50,6 @@ const SettingsStyles = styled.div`
 
         .imageField {
           position: relative;
-
-          * {
-          }
 
           &:hover {
             .profileImage {
@@ -71,6 +79,13 @@ const SettingsStyles = styled.div`
             object-fit: cover;
             border-radius: 100%;
             box-shadow: 0 0 30px -10px #616161;
+
+            @media (max-width: 768px) {
+              width: 130px;
+              height: 130px;
+
+              box-shadow: 0 0 25px -10px #616161;
+            }
           }
 
           .editIcon {
@@ -83,6 +98,10 @@ const SettingsStyles = styled.div`
             display: none;
 
             filter: drop-shadow(0 0 5px black);
+
+            @media (max-width: 768px) {
+              width: 30%;
+            }
           }
         }
 
@@ -93,6 +112,19 @@ const SettingsStyles = styled.div`
           }
           &.surnameField {
             margin-top: 10px;
+          }
+
+          @media (max-width: 768px) {
+            margin-bottom: 5px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            label {
+              font-size: 15px;
+              margin-bottom: 7px;
+            }
           }
 
           input {

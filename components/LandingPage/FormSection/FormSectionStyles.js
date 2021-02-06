@@ -7,6 +7,10 @@ const FormSectionStyles = styled.div`
   clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0% 100%);
   overflow-y: hidden;
 
+  @media (max-width: 1024px) {
+    clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0% 100%);
+  }
+
   .formSectionContainer {
     position: relative;
 
@@ -17,6 +21,10 @@ const FormSectionStyles = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 1024px) {
+      margin: 20px 0 80px 0;
+    }
 
     h2 {
       color: #fff;
@@ -54,6 +62,10 @@ const FormSectionStyles = styled.div`
 
         font-weight: normal;
         outline: none;
+
+        @media (max-width: 768px) {
+          margin-top: 15px;
+        }
       }
 
       .emailError,
@@ -64,6 +76,10 @@ const FormSectionStyles = styled.div`
 
         color: red;
         font-size: 12px;
+
+        @media (max-width: 768px) {
+          margin: 0 0 -10px 20px;
+        }
       }
 
       .emptyFieldsError {
@@ -83,6 +99,10 @@ const FormSectionStyles = styled.div`
 
         cursor: pointer;
         outline: none;
+
+        @media (max-width: 768px) {
+          width: 150px;
+        }
 
         span {
           font-size: clamp(16px, 1vw, 18px);

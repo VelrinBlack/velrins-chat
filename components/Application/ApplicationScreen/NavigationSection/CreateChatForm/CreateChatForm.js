@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 
 import CreateChatFormStyles from './CreateChatFormStyles';
-import Context from '../../../../Context';
+import Context from '../../../../../Context';
 
 const CreateChatForm = ({ setChats }) => {
   const token = useContext(Context).token;

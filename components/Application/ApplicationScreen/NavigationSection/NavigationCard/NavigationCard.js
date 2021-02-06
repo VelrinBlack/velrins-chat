@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 
 import NavigationCardStyles from './NavigationCardStyles';
-import Context from '../../../../Context';
+import Context from '../../../../../Context';
 
 const NavigationCard = ({
   cardUser: { name, surname, image },
@@ -39,7 +39,10 @@ const NavigationCard = ({
     <NavigationCardStyles
       onClick={({ target }) => {
         if (
+          target.className !== 'modalBackground' &&
+          target.className !== 'modal' &&
           target.className !== 'removeChatButtonImg' &&
+          target.className !== 'modalTitle' &&
           target.className !== 'no' &&
           target.className !== 'yes'
         ) {
@@ -63,7 +66,7 @@ const NavigationCard = ({
       {modalActive && (
         <div className='modalBackground'>
           <div className='modal'>
-            <h2>
+            <h2 className='modalTitle'>
               Are you sure you want to delete chat with {name} {surname}?
             </h2>
 

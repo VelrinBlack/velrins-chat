@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 
 import SendMessageFormStyles from './SendMessageFormStyles';
-import Context from '../../../../Context';
+import Context from '../../../../../Context';
 
 const SendMessageForm = ({ chatId, userId, setChats, activeChat, chats }) => {
   const token = useContext(Context).token;

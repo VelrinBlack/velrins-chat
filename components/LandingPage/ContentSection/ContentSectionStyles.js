@@ -14,6 +14,16 @@ const ContentSectionStyles = styled.div`
     display: flex;
     align-items: center;
 
+    @media (max-width: 1024px) {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: auto;
+      padding: 0;
+    }
+
     img {
       width: 100px;
     }
@@ -44,6 +54,10 @@ const ContentSectionStyles = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 1024px) {
+      margin-top: 150px;
+    }
 
     h2 {
       width: clamp(300px, 25vw, 750px);

@@ -8,6 +8,10 @@ const MessageStyles = styled.div`
   flex-direction: column;
   align-items: flex-end;
 
+  @media (max-width: 768px) {
+    margin: 40px 10px -30px 10px;
+  }
+
   &.receiver {
     align-self: flex-start;
 
@@ -27,6 +31,10 @@ const MessageStyles = styled.div`
     border-radius: 20px;
 
     color: #fff;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   time {

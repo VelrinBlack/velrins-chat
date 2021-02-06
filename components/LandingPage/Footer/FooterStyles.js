@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const FooterStyles = styled.footer`
   width: 100%;
-  height: 33px;
+  min-height: 33px;
   background-color: #2c2c2c;
 
   display: flex;

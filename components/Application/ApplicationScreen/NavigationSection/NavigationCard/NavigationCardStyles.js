@@ -14,6 +14,10 @@ const NavigationCardStyles = styled.div`
     background-color: #14576b;
   }
 
+  @media (max-width: 768px) {
+    padding: 15px 0;
+  }
+
   .profileImg {
     grid-column: 2;
 
@@ -21,17 +25,34 @@ const NavigationCardStyles = styled.div`
     height: 50px;
     object-fit: cover;
     border-radius: 25px;
+
+    @media (max-width: 768px) {
+      width: 45px;
+      height: 45px;
+    }
   }
 
   div {
     margin-left: 15px;
 
+    @media (max-width: 768px) {
+      margin-left: 8px;
+    }
+
     h3 {
       font-size: 18px;
+
+      @media (max-width: 768px) {
+        font-size: 15px;
+      }
     }
 
     p {
       font-size: 14px;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -95,6 +116,10 @@ const NavigationCardStyles = styled.div`
 
         font-weight: 200;
         color: #000;
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+        }
       }
 
       div > button {
@@ -105,12 +130,17 @@ const NavigationCardStyles = styled.div`
 
         transition: transform 0.2s;
 
+        @media (max-width: 768px) {
+          height: 80%;
+        }
+
         &.no {
           border: 1px solid #b0b0b0;
         }
 
         &.yes {
           background-color: red;
+          color: #fff;
         }
 
         &:hover {
