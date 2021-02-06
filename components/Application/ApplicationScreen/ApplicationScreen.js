@@ -6,6 +6,7 @@ import NavigationSection from './NavigationSection/NavigationSection';
 import ChatSection from './ChatSection/ChatSection';
 import Settings from './Settings/Settings';
 import Context from '../../../Context';
+import ApplicationScreenStyles from './ApplicationScreenStyles';
 
 const ApplicationScreen = () => {
   const token = useContext(Context).token;
@@ -76,7 +77,6 @@ const ApplicationScreen = () => {
             setSettingsActive={setSettingsActive}
           />
         )}
-
         {settingsActive && (
           <Settings user={user} setUser={setUser} setSettingsActive={setSettingsActive} />
         )}
@@ -84,7 +84,7 @@ const ApplicationScreen = () => {
     );
   } else {
     return (
-      <>
+      <ApplicationScreenStyles>
         <NavigationSection
           user={user}
           chats={chats}
@@ -105,7 +105,7 @@ const ApplicationScreen = () => {
         {settingsActive && (
           <Settings user={user} setUser={setUser} setSettingsActive={setSettingsActive} />
         )}
-      </>
+      </ApplicationScreenStyles>
     );
   }
 };
