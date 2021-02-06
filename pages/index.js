@@ -30,6 +30,7 @@ const HomePage = () => {
   return (
     <>
       <Head>
+        <html lang='en-us' />
         <title>Velrin's Chat</title>
         <meta name='description' content='Take your chats to the next level!' />
         <link rel='shortcut icon' type='image/jpg' href='/images/logo.png' />
