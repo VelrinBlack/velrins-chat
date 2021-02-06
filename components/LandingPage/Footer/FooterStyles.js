@@ -9,6 +9,11 @@ const FooterStyles = styled.footer`
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 768px) {
+    min-height: 60px;
+    flex-direction: column;
+  }
+
   span {
     color: #fff;
     font-size: 13px;
