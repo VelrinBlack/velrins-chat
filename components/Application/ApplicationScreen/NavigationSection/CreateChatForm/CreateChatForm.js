@@ -17,7 +17,7 @@ const CreateChatForm = ({ setChats }) => {
       .post(
         `${process.env.BACKEND_URL}/api/chats`,
         {
-          email: inputValue,
+          email: inputValue.toLowerCase().trim(),
         },
         {
           headers: { 'x-auth-token': token },
